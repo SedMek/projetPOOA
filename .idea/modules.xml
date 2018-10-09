@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/PycharmProjects/TP1_Gestion_employes/.idea/TP1_Gestion_employes.iml" filepath="$USER_HOME$/PycharmProjects/TP1_Gestion_employes/.idea/TP1_Gestion_employes.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/TP_2_Threads/.idea/TP_1Threads_Reseau.iml" filepath="$USER_HOME$/PycharmProjects/TP_2_Threads/.idea/TP_1Threads_Reseau.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/projetPOOA.iml" filepath="$PROJECT_DIR$/.idea/projetPOOA.iml" />
     </modules>
   </component>
