@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f11402b-ac42-4c3c-a4af-0b67a8869309" name="Default Changelist" comment="" />
+    <list default="true" id="daefa042-5e59-4806-b27d-2ac633f06e9a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,43 +9,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/projetPOOA$testingGithub.coverage" NAME="testingGithub Coverage Results" MODIFIED="1539008229622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/projetPOOA$tmdbConnection.coverage" NAME="tmdbConnection Coverage Results" MODIFIED="1539089326533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/projetPOOA$Hello.coverage" NAME="Hello Coverage Results" MODIFIED="1539088066760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/learningFlask$our_tmdb.coverage" NAME="our_tmdb Coverage Results" MODIFIED="1539437126536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/learningFlask$vues.coverage" NAME="vues Coverage Results" MODIFIED="1539540894810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="-775751610">
+    <session id="-762421862">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.33" value="1" />
-          <entry key="project.open.time.37" value="1" />
+          <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.34" value="1" />
           <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="8" />
+          <entry key="css" value="12" />
+          <entry key="html" value="11" />
+          <entry key="jpg" value="1" />
+          <entry key="js" value="2" />
+          <entry key="png" value="1" />
+          <entry key="py" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="8" />
+          <entry key="CSS" value="12" />
+          <entry key="HTML" value="11" />
+          <entry key="Image" value="2" />
+          <entry key="JavaScript" value="2" />
+          <entry key="Python" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="26" />
-          <entry key="dummy" value="29" />
-          <entry key="py" value="3579" />
+          <entry key="Python Console" value="32" />
+          <entry key="css" value="105" />
+          <entry key="html" value="2360" />
+          <entry key="py" value="2294" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="29" />
-          <entry key="Python" value="3605" />
+          <entry key="CSS" value="105" />
+          <entry key="HTML" value="2360" />
+          <entry key="Python" value="2326" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -54,43 +64,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/users.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
-              <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-              <folding>
-                <marker date="1539080432285" expanded="true" signature="13:508" ph="..." />
-                <marker date="1539080432285" expanded="true" signature="519:524" ph="..." />
-                <marker date="1539080432285" expanded="true" signature="1673:1678" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tmdbConnection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-                <marker date="1539089312876" expanded="true" signature="221:523" ph="..." />
-                <marker date="1539089312876" expanded="true" signature="605:1259" ph="..." />
-                <marker date="1539089312876" expanded="true" signature="1270:1271" ph="..." />
-                <marker date="1539089312876" expanded="true" signature="1270:1573" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Hello.py">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#form#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/seddikMade.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15688">
+              <caret line="6244" column="17" lean-forward="true" selection-start-line="6244" selection-start-column="17" selection-end-line="6244" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vues.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#68#0" expanded="true" />
+                <marker date="1539532452415" expanded="true" signature="464:653" ph="..." />
+                <marker date="1539532452415" expanded="true" signature="654:656" ph="..." />
+                <marker date="1539532452415" expanded="true" signature="1507:1511" ph="..." />
+                <marker date="1539532452415" expanded="true" signature="1702:1778" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/test.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/our_tmdb.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-255">
+              <caret line="3" column="43" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="43" />
               <folding>
-                <marker date="1539088099428" expanded="true" signature="107:112" ph="..." />
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1539528086220" expanded="true" signature="1661:1666" ph="..." />
               </folding>
             </state>
           </provider>
@@ -102,27 +140,33 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fav_series</find>
+      <find>link</find>
+      <find>img-fluid img-thumbnail</find>
+      <find>img-thumbnail</find>
+      <find>posters</find>
+      <find>bla</find>
+      <find>favo</find>
+      <find>ajax</find>
     </findStrings>
-  </component>
-  <component name="Git.Settings">
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/testingGithub.py" />
-        <option value="$PROJECT_DIR$/users.py" />
-        <option value="$PROJECT_DIR$/flask.py" />
-        <option value="$PROJECT_DIR$/flaskTuto.py" />
-        <option value="$PROJECT_DIR$/Hello.py" />
-        <option value="$PROJECT_DIR$/tmdbConnection.py" />
+        <option value="$PROJECT_DIR$/templates/meteo.html" />
+        <option value="$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/templates/series_thumbnail.html" />
+        <option value="$PROJECT_DIR$/our_tmdb.py" />
+        <option value="$PROJECT_DIR$/vues.py" />
+        <option value="$PROJECT_DIR$/templates/test.html" />
+        <option value="$PROJECT_DIR$/static/seddikMade.css" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
       </list>
     </option>
   </component>
@@ -132,7 +176,12 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -142,26 +191,59 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="projetPOOA" type="b2602c69:ProjectViewProjectNode" />
-              <item name="projetPOOA" type="462c0819:PsiDirectoryNode" />
+              <item name="learningFlask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="learningFlask" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="learningFlask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="learningFlask" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="learningFlask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="learningFlask" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="learningFlask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="learningFlask" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/TP_2_Threads" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PyCharmOSY" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\static" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\static\bla" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\static\test" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\static\images" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\templates" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\static" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask\startbootstrap-thumbnail-gallery-gh-pages" />
+      <recent name="C:\Users\Seddik's PC\PycharmProjects\learningFlask" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -175,9 +257,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.tmdbConnection">
-    <configuration name="Hello" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="projetPOOA" />
+  <component name="RunManager" selected="Python.vues">
+    <configuration name="our_tmdb" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="learningFlask" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -189,7 +271,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Hello.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/our_tmdb.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,8 +280,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="testingGithub" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="projetPOOA" />
+    <configuration name="vues" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="learningFlask" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -211,29 +293,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\Seddik's PC\Documents\GitHub\projetPOOA\users.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tmdbConnection" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="projetPOOA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmdbConnection.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vues.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -243,15 +303,13 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.testingGithub" />
-      <item itemvalue="Python.tmdbConnection" />
-      <item itemvalue="Python.Hello" />
+      <item itemvalue="Python.vues" />
+      <item itemvalue="Python.our_tmdb" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tmdbConnection" />
-        <item itemvalue="Python.Hello" />
-        <item itemvalue="Python.testingGithub" />
+        <item itemvalue="Python.vues" />
+        <item itemvalue="Python.our_tmdb" />
       </list>
     </recent_temporary>
   </component>
@@ -260,24 +318,23 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1f11402b-ac42-4c3c-a4af-0b67a8869309" name="Default Changelist" comment="" />
-      <created>1538730024369</created>
+      <changelist id="daefa042-5e59-4806-b27d-2ac633f06e9a" name="Default Changelist" comment="" />
+      <created>1539373202731</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1538730024369</updated>
+      <updated>1539373202731</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -302,67 +359,89 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="17">
-            <caret line="1" column="28" lean-forward="true" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/TP1_Gestion_employes/storage_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-832" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/TP1_Gestion_employes/HR_Tool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-444" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/TP_2_Threads/Ex1.py">
+    <entry file="file://$PROJECT_DIR$/startbootstrap-thumbnail-gallery-gh-pages/meteo.css" />
+    <entry file="file://$PROJECT_DIR$/templates/meteo.js" />
+    <entry file="file://$PROJECT_DIR$/templates/meteo.html" />
+    <entry file="file://$PROJECT_DIR$/static/meteo.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/TP_2_Threads/Ex2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/TP1_Gestion_employes/employees.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users.py">
+    <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap-grid.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+        <state relative-caret-position="-25" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap-reboot.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-25" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/css/thumbnail-gallery.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-25" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/add.png" />
+    <entry file="file://$PROJECT_DIR$/templates/series_thumbnail.html" />
+    <entry file="file://$PROJECT_DIR$/our_tmdb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="43" />
           <folding>
-            <marker date="1539080432285" expanded="true" signature="13:508" ph="..." />
-            <marker date="1539080432285" expanded="true" signature="519:524" ph="..." />
-            <marker date="1539080432285" expanded="true" signature="1673:1678" ph="..." />
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1539528086220" expanded="true" signature="1661:1666" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tmdbConnection.py">
+    <entry file="file://$PROJECT_DIR$/static/images/plus300x200-filled.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vues.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
+        <state relative-caret-position="294">
+          <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1539089312876" expanded="true" signature="221:523" ph="..." />
-            <marker date="1539089312876" expanded="true" signature="605:1259" ph="..." />
-            <marker date="1539089312876" expanded="true" signature="1270:1271" ph="..." />
-            <marker date="1539089312876" expanded="true" signature="1270:1573" ph="..." />
+            <element signature="e#0#68#0" expanded="true" />
+            <marker date="1539532452415" expanded="true" signature="464:653" ph="..." />
+            <marker date="1539532452415" expanded="true" signature="654:656" ph="..." />
+            <marker date="1539532452415" expanded="true" signature="1507:1511" ph="..." />
+            <marker date="1539532452415" expanded="true" signature="1702:1778" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Hello.py">
+    <entry file="file://$PROJECT_DIR$/static/startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15688">
+          <caret line="6244" column="17" lean-forward="true" selection-start-line="6244" selection-start-column="17" selection-end-line="6244" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/seddikMade.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
           <folding>
-            <marker date="1539088099428" expanded="true" signature="107:112" ph="..." />
+            <element signature="n#style#0;n#form#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

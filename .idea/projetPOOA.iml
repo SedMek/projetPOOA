@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="TP1_Gestion_employes" />
     <orderEntry type="module" module-name="TP_1Threads_Reseau" />
+    <orderEntry type="module" module-name="DM_algo" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
