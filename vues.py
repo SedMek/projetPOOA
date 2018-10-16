@@ -42,14 +42,14 @@ def home():
     id_poster = dict()
     if request.method == "POST":
         if request.form["search"]:  # if the search query is not empty
-            search_result = our_tmdb.Search(request.form["search"]).get_page()["results"]
+            search_result = our_tmdb.Search(request.form["search"]).series
             if len(search_result) == 0:
                 search_result_code = -1
             else:
                 search_result_code = 1
-                for series in search_result:
+                for serie in search_result:
                     try:
-                        id_poster[series["id"]] = POSTER_PATH + series["poster_path"]
+                        id_poster[serie.serie_infos["id"]] = POSTER_PATH + serie.serie_infos["poster_path"]
                     except:  # some series might not have posters
                         pass
         else:
