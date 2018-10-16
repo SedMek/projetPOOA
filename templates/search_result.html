@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block search_result %}
+<!-- Seddik made style -->
+    <style type="text/css">
+        .search-result {
+            position: relative;
+            display: inline-block;
+        }
+        .search-result:hover:before {
+            content: '';
+            display: block;
+            background: url({{url_for('static', filename='images/plus300x200white-transparent.png')}}) no-repeat;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 5px;
+            right: -5px;
+        }
+    </style>
+<!--show search results-->
+    <h2 class="my-4 text-center text-lg-left">Search results:</h2> <!--display this only when a search has been made-->
+    <div><h4 class="m-0 text-center"
+             style="display: {%if search_result_code == -1 %} unset {%else%} none {%endif%}">We found nothing! Nada! Are
+        you sure this series even exists ?!</h4> <!--display this only when no result is found-->
+        <h4 class="m-0 text-center"
+             style="display: {%if search_result_code == -2 %} unset {%else%} none {%endif%}">Apparently you want to search for nothing, well, you found it!</h4> <!--display this only when no result is found-->
+    </div>
+    <div class="row text-center text-lg-left">
+        {% for key in id_poster.keys() %}
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <a class="d-block mb-4 h-100 search-result" href="{{url_for('add_series_to_fav', series_id= key)}}">
+                <img class="img-fluid img-thumbnail" src={{id_poster[key]}} alt="">
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+    <!-- end show search results-->
+{% endblock %}
