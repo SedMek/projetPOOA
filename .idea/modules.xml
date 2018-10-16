@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/PycharmProjects/DM_algo/.idea/DM_algo.iml" filepath="$USER_HOME$/PycharmProjects/DM_algo/.idea/DM_algo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/learningFlask.iml" filepath="$PROJECT_DIR$/.idea/learningFlask.iml" />
     </modules>
   </component>
