@@ -41,7 +41,7 @@ def home():
     search_result_code = 0  # 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
-        if request.form["search"]: # if the search query is not empty
+        if request.form["search"]:  # if the search query is not empty
             search_result = our_tmdb.Search(request.form["search"]).get_page()["results"]
             if len(search_result) == 0:
                 search_result_code = -1
@@ -69,6 +69,17 @@ def add_series_to_fav(series_id):
         fav_series.remove(series_id)
 
     fav_series.insert(0, series_id)
+    save_fav_object(fav_series)
+    return redirect(url_for("home"))
+
+
+@app.route("/removeSeries/<int:series_id>")
+def remove_series_from_fav(series_id):
+    fav_series = get_fav_object()
+
+    if series_id in fav_series:  # if the series is already in the list, remove it from the list
+        fav_series.remove(series_id)
+
     save_fav_object(fav_series)
     return redirect(url_for("home"))
 
