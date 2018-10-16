@@ -31,7 +31,7 @@ class Episode(Season):
 
 
 class Search:
-    def __init__(self, query, language="en-US"):
+    def __init__(self, query="", language="en-US"):
         self.query = query
         self.language = language
         self.basic_search_url = "http://api.themoviedb.org/" + api_version + "/search/tv?api_key=" + api_key + "&query=" + query + "&language" + self.language

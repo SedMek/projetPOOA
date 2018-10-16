@@ -38,20 +38,22 @@ def set_fav_posters(list_of_series):
 @app.route("/", methods=['GET', 'POST'])
 def home():
     fav_series = get_fav_object()
-    search_result_code = 0  # 0 for no search issued, 1 for search with results and -1 for search without results
+    search_result_code = 0  # 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
-        # fav_series.insert(0, request.form["search"])  # to add the new series in first position
-        search_result = our_tmdb.Search(request.form["search"]).get_page()["results"]
-        if len(search_result) == 0:
-            search_result_code = -1
+        if request.form["search"]: # if the search query is not empty
+            search_result = our_tmdb.Search(request.form["search"]).get_page()["results"]
+            if len(search_result) == 0:
+                search_result_code = -1
+            else:
+                search_result_code = 1
+                for series in search_result:
+                    try:
+                        id_poster[series["id"]] = POSTER_PATH + series["poster_path"]
+                    except:  # some series might not have posters
+                        pass
         else:
-            search_result_code = 1
-            for series in search_result:
-                try:
-                    id_poster[series["id"]] = POSTER_PATH + series["poster_path"]
-                except:  # some series might not have posters
-                    pass
+            search_result_code = -2
     if request.method == "GET":
         pass  # TODO
 
