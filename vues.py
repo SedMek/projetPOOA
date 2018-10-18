@@ -35,21 +35,29 @@ def set_fav_posters(list_of_series):
     return posters
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def home():
     fav_series = get_fav_object()
-    search_result_code = 0  # 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
+    posters = set_fav_posters(fav_series)
+    return render_template("index.html", posters=posters)
+
+
+@app.route("/searchResult", methods=['GET', 'POST'])
+def search():
+    fav_series = get_fav_object()
+    posters = set_fav_posters(fav_series)
+    # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
         if request.form["search"]:  # if the search query is not empty
-            search_result = our_tmdb.Search(request.form["search"]).get_page()["results"]
+            search_result = our_tmdb.Search(request.form["search"]).series
             if len(search_result) == 0:
                 search_result_code = -1
             else:
                 search_result_code = 1
-                for series in search_result:
+                for serie in search_result:
                     try:
-                        id_poster[series["id"]] = POSTER_PATH + series["poster_path"]
+                        id_poster[serie.serie_infos["id"]] = POSTER_PATH + serie.serie_infos["poster_path"]
                     except:  # some series might not have posters
                         pass
         else:
@@ -57,8 +65,8 @@ def home():
     if request.method == "GET":
         pass  # TODO
 
-    posters = set_fav_posters(fav_series)
-    return render_template("index.html", posters=posters, id_poster=id_poster, search_result_code=search_result_code)
+    return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
+                           posters=posters)
 
 
 @app.route("/addSeries/<int:series_id>")
