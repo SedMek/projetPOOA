@@ -10,6 +10,7 @@
 
     <title>Projet POOA</title>
 
+    <script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
 
 
     <!-- Bootstrap core CSS -->
@@ -23,7 +24,6 @@
 </head>
 
 <body>
-
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -68,16 +68,15 @@
 
 <!-- Page Content -->
 <div class="container">
-
     {% block search_result %} {% endblock %}
 
     <h1 class="my-4 text-center text-lg-left">Favorite series Gallery</h1>
     <div class="row text-center text-lg-left">
         <!-- show favorite series -->
-        {% for poster in posters %}
-        <div class="col-lg-3 col-md-4 col-xs-6">
-            <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src={{poster}} alt="">
+        {% for series in fav_series %}
+        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id}}>
+            <a href="{{url_for('series_info', series_id= series.id)}}" class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
             </a>
         </div>
         {%endfor%}
@@ -91,7 +90,9 @@
 
 </div>
 <!-- /.container -->
-
+<!-- show series info-->
+        {% block series_info %} {% endblock %}
+<!-- end show series info -->
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -101,7 +102,6 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <style type="text/css">
     body {

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block series_info %}
+<style type="text/css">
+    #series_info_block {
+        height: 350px;
+        width: 100%;
+        background: #1d2124;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .top-right-button {
+        top: 0;
+        right: 0;
+        position: absolute;
+    }
+
+    .series-info-table {
+        padding: .375rem .75rem;
+        width: 80%;
+    }
+
+    .series-overview {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+    .series-title {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+    .series-networks {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .bottom-nav-bar {
+        text-align: center;
+    }
+
+
+</style>
+
+<div class="text-white bg-dark" id="series_info_block">
+    <table class="series-info-table" style="margin: 20px">
+        <tr>
+            <td class="poster" rowspan="4" width="20%">
+                <img class="img-fluid img-thumbnail"
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+                <div>
+                    <a href="{{ url_for('remove_series_from_fav', series_id= series.id) }}" style="position: relative;">remove
+                        from favorite</a>
+                </div>
+            </td>
+            <td class="series-title" height="10%">
+                <b> title: </b>{{series.serie_infos["name"]}}
+            </td>
+        </tr>
+        <tr>
+            <td class="series-networks" height="10%"> <b>network(s): </b>{{ series|join_networks }}</td>
+        </tr>
+        <tr>
+            <td class="series-overview" height="80%"><b>overview: </b>{{series.serie_infos["overview"]}}</td>
+        </tr>
+    </table>
+
+
+    <img class="top-right-button btn" src="{{url_for('static',filename='images/cross52x52white-transparent.png')}}"
+         onclick="$('#series_info_block').hide()">
+    <div>
+        <nav class="bottom-nav-bar"><a href="#">Presentation</a> | <a href="#">Episodes</a></nav>
+    </div>
+</div>
+<!--
+<script type="text/javascript">
+$("#"+"{{series.id}}").append($("#series_info_block"))
+</script>
+-->
+
+{% endblock %}
