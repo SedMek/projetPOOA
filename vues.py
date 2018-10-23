@@ -35,10 +35,18 @@ def set_fav_posters(list_of_series):
     return posters
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def home():
-    fav_series = get_fav_object()
-    search_result_code = 0  # 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
+    fav_series_ids = get_fav_object()
+    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
+    return render_template("index.html", fav_series=fav_series)
+
+
+@app.route("/searchResult", methods=['GET', 'POST'])
+def search():
+    fav_series_ids = get_fav_object()
+    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
+    # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
         if request.form["search"]:  # if the search query is not empty
@@ -57,30 +65,30 @@ def home():
     if request.method == "GET":
         pass  # TODO
 
-    posters = set_fav_posters(fav_series)
-    return render_template("index.html", posters=posters, id_poster=id_poster, search_result_code=search_result_code)
+    return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
+                           fav_series=fav_series)
 
 
 @app.route("/addSeries/<int:series_id>")
 def add_series_to_fav(series_id):
-    fav_series = get_fav_object()
+    fav_series_ids = get_fav_object()
 
-    if series_id in fav_series:  # if the series is already in the list, remove it from the list
-        fav_series.remove(series_id)
+    if series_id in fav_series_ids:  # if the series is already in the list, remove it from the list
+        fav_series_ids.remove(series_id)
 
-    fav_series.insert(0, series_id)
-    save_fav_object(fav_series)
+    fav_series_ids.insert(0, series_id)
+    save_fav_object(fav_series_ids)
     return redirect(url_for("home"))
 
 
 @app.route("/removeSeries/<int:series_id>")
 def remove_series_from_fav(series_id):
-    fav_series = get_fav_object()
+    fav_series_ids = get_fav_object()
 
-    if series_id in fav_series:  # if the series is already in the list, remove it from the list
-        fav_series.remove(series_id)
+    if series_id in fav_series_ids:  # if the series is already in the list, remove it from the list
+        fav_series_ids.remove(series_id)
 
-    save_fav_object(fav_series)
+    save_fav_object(fav_series_ids)
     return redirect(url_for("home"))
 
 
@@ -88,6 +96,23 @@ def remove_series_from_fav(series_id):
 def clear_fav():
     save_fav_object([])
     return redirect(url_for("home"))
+
+
+@app.route("/seriesInfo/<int:series_id>")
+def series_info(series_id):
+    series = our_tmdb.Serie(series_id)
+    fav_series_ids = get_fav_object()
+    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
+    return render_template("series_info.html", series=series, fav_series=fav_series)
+
+
+# filters
+@app.template_filter('join_networks')
+def join_networks(series):
+    network_names = []
+    for i in range(len(series.serie_infos["networks"])):
+        network_names.append(series.serie_infos["networks"][i]["name"])
+    return " &".join(network_names)
 
 
 if __name__ == "__main__":

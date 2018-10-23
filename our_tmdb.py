@@ -10,7 +10,7 @@ class Series:
         self.id = id
         self.series_info = requests.get('https://api.themoviedb.org/' + api_version + '/tv/' + str(
             id) + '?api_key=' + api_key + '&language=en-US').json()
-        
+        self.id = id  # TODO put all the content of serie_infos directly into Serie object
 
         
 
@@ -42,11 +42,9 @@ class Search:
         self.total_pages = self.resp["total_pages"]
         self.series=[Series(e["id"]) for e in self.get_page(self)["results"]]
     
-    
+
     def get_page(self, page=1):
         return requests.get(self.basic_search_url + "&page=" + str(page)).json()
-
-
 
 
 def main():
@@ -57,5 +55,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-#new
+# new
