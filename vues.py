@@ -5,7 +5,7 @@ import pickle
 app = Flask(__name__)
 app.secret_key = "hello".encode()
 
-POSTER_PATH = "https://image.tmdb.org/t/p/w200/"
+
 
 
 # this variable should be global so the user can remember the series that he has already added
