@@ -78,7 +78,7 @@
              onclick="$('#detailed_'+{{series.id|string}}).show()">
             <div class="d-block mb-4 h-100">
                 <img class="img-fluid img-thumbnail"
-                     src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </div>
         </div>
         {%endfor%}
@@ -97,7 +97,7 @@
 <!-- show series info-->
 <style type="text/css">
     .series_info_block {
-        height: 375px;
+        height: 425px;
         width: 100%;
         background: #1d2124;
         position: fixed;
@@ -117,6 +117,7 @@
     .series-info-table {
         padding: .375rem .75rem;
         width: 80%;
+        height: 375px;
     }
 
     .poster{
@@ -126,20 +127,27 @@
     .series-overview {
         vertical-align: top;
         padding-left: 20px;
+        height: 80%;
     }
 
     .series-title {
         vertical-align: top;
         padding-left: 20px;
+        height: 10%;
     }
 
     .series-networks {
         vertical-align: top;
         padding-left: 20px;
+        height: 10%;
     }
 
     .bottom-nav-bar {
         text-align: center;
+    }
+    .table-cell {
+        max-height: 250px;
+        overflow: auto;
     }
 /*
     table, th, td {
@@ -155,18 +163,22 @@
         <tr>
             <td class="poster" rowspan="3" width="30%">
                 <img class="img-fluid img-thumbnail"
-                     src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
 
             </td>
-            <td class="series-title" height="10%">
-                <b> title: </b>{{series.serie_infos["name"]}}
+            <td class="series-title">
+                <div class="table-cell"><b> title: </b>{{series.series_info["name"]}} </div>
             </td>
         </tr>
         <tr>
-            <td class="series-networks" height="10%"><b>network(s): </b>{{ series|join_networks }}</td>
+            <td class="series-networks">
+                <div class="table-cell"> <b>network(s): </b>{{ series|join_networks }}</div>
+            </td>
         </tr>
         <tr>
-            <td class="series-overview" height="80%"><b>overview: </b>{{series.serie_infos["overview"]}}</td>
+            <td class="series-overview">
+                <div class="table-cell"> <b>overview: </b>{{series.series_info["overview"]}}</div>
+            </td>
         </tr>
         <tr>
             <td><div class="bottom-nav-bar">
