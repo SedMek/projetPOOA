@@ -71,19 +71,23 @@
     {% block search_result %} {% endblock %}
 
     <h1 class="my-4 text-center text-lg-left">Favorite series Gallery</h1>
-    <div class="row text-center text-lg-left">
+    <div class="row text-center text-lg-left pointer">
         <!-- show favorite series -->
         {% for series in fav_series %}
-        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id}}>
-            <a href="{{url_for('series_info', series_id= series.id)}}" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
-            </a>
+        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
+             onclick="$('#detailed_'+{{series.id|string}}).show()">
+            <div class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail"
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+            </div>
         </div>
         {%endfor%}
         <!-- end show favorite series -->
+
         <div class="col-lg-3 col-md-4 col-xs-6">
             <a href="#searchBar" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='images/plus300x200-filled.jpg')}}" alt="">
+                <img class="img-fluid img-thumbnail"
+                     src="{{url_for('static', filename='images/plus300x200-filled.jpg')}}" alt="">
             </a>
         </div>
     </div>
@@ -91,7 +95,100 @@
 </div>
 <!-- /.container -->
 <!-- show series info-->
-        {% block series_info %} {% endblock %}
+<style type="text/css">
+    .series_info_block {
+        height: 375px;
+        width: 100%;
+        background: #1d2124;
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .top-right-button {
+        top: 0;
+        right: 0;
+        position: absolute;
+    }
+
+    .series-info-table {
+        padding: .375rem .75rem;
+        width: 80%;
+    }
+
+    .poster{
+        text-align: center;
+    }
+
+    .series-overview {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .series-title {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .series-networks {
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .bottom-nav-bar {
+        text-align: center;
+    }
+/*
+    table, th, td {
+        border: 1px solid black;
+    }
+*/
+</style>
+{% for series in fav_series %}
+
+<div class="text-white bg-dark series_info_block" id={{"detailed_"+series.id|string}} style="display: none">
+    <!-- Presentation vue-->
+    <table class="series-info-table" style="margin: 20px" id="presentation">
+        <tr>
+            <td class="poster" rowspan="3" width="30%">
+                <img class="img-fluid img-thumbnail"
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+
+            </td>
+            <td class="series-title" height="10%">
+                <b> title: </b>{{series.serie_infos["name"]}}
+            </td>
+        </tr>
+        <tr>
+            <td class="series-networks" height="10%"><b>network(s): </b>{{ series|join_networks }}</td>
+        </tr>
+        <tr>
+            <td class="series-overview" height="80%"><b>overview: </b>{{series.serie_infos["overview"]}}</td>
+        </tr>
+        <tr>
+            <td><div class="bottom-nav-bar">
+                    <a href="{{ url_for('remove_series_from_fav', series_id= series.id) }}"
+                       style="position: relative;">remove
+                        from favorite</a>
+                </div></td>
+            <td><div>
+        <nav class="bottom-nav-bar"><a href="#">Presentation</a> | <a href="#">Episodes</a></nav>
+    </div></td>
+        </tr>
+    </table>
+    <!-- Episodes vue-->
+
+
+    <img class="top-right-button btn"
+         src="{{url_for('static',filename='images/cross52x52white-transparent.png')}}"
+         onclick="$('.series_info_block').hide()">
+
+</div>
+
+{% endfor %}
 <!-- end show series info -->
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -106,6 +203,10 @@
 <style type="text/css">
     body {
         background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .pointer {
+        cursor: pointer;
     }
 </style>
 </body>

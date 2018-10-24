@@ -98,14 +98,6 @@ def clear_fav():
     return redirect(url_for("home"))
 
 
-@app.route("/seriesInfo/<int:series_id>")
-def series_info(series_id):
-    series = our_tmdb.Serie(series_id)
-    fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
-    return render_template("series_info.html", series=series, fav_series=fav_series)
-
-
 # filters
 @app.template_filter('join_networks')
 def join_networks(series):
