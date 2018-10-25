@@ -11,7 +11,7 @@
     <title>Projet POOA</title>
 
     <script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
-
+    <script src="{{url_for('static', filename='seddikMade.js')}}"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.min.css')}}"
@@ -71,13 +71,13 @@
     {% block search_result %} {% endblock %}
 
     <h1 class="my-4 text-center text-lg-left">Favorite series Gallery</h1>
-    <div class="row text-center text-lg-left pointer">
+    <div class="row text-center text-lg-left">
         <!-- show favorite series -->
         {% for series in fav_series %}
         <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
-             onclick="$('#detailed_'+{{series.id|string}}).show()">
+             >
             <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail"
+                <img class="img-fluid img-thumbnail pointer" onclick="$('#detailed_'+{{series.id|string}}).show()"
                      src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </div>
         </div>
@@ -163,7 +163,7 @@
         <tr>
             <td class="poster" rowspan="3" width="30%">
                 <img class="img-fluid img-thumbnail"
-                     src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
+                     src="https://via.placeholder.com/200x300" alt="">
 
             </td>
             <td class="series-title">
