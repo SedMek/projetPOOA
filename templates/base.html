@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Projet POOA</title>
+
+    <script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
+
+    <!-- Home made JS and CSS -->
+
+    <link href="{{url_for('static', filename='seddikMade.css')}}" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.min.css')}}"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/css/thumbnail-gallery.css')}}"
+          rel="stylesheet">
+
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <form action="/searchResult" method="POST">
+            <input type="text" name="search" id="searchBar" placeholder="Search..">
+        </form>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('home')}}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    {% block search_result %} {% endblock %}
+
+    <h1 class="my-4 text-center text-lg-left">Favorite series Gallery</h1>
+    <div class="row text-center text-lg-left">
+        <!-- show favorite series -->
+        {% for series in fav_series %}
+        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
+             >
+            <div class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail pointer" onclick="show_info_by_id({{series.id}})"
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
+            </div>
+        </div>
+        {%endfor%}
+        <!-- end show favorite series -->
+
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <a href="#searchBar" class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail"
+                     src="{{url_for('static', filename='images/plus300x200-filled.jpg')}}" alt="">
+            </a>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+<!-- show series info-->
+<div class="text-white bg-dark series_info_block" id="detailed_1399"> <!--TODO change 1399-->
+    <!-- Presentation vue-->
+    <table class="series-info-table" id="presentation">
+        <tr>
+            <td class="poster" rowspan="3" width="30%">
+                <img class="img-fluid img-thumbnail" id="poster"
+                     src="https://via.placeholder.com/200x300" alt="">
+
+            </td>
+            <td class="series-title">
+                <div class="table-cell">
+                    <span class="label"> <b> title: </b> </span>
+                    <span class="content" id="title"> title </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="series-networks">
+                <div class="table-cell">
+                    <span class="label"> <b>network(s): </b> </span>
+                    <span class="content" id="networks"> networks </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="series-overview">
+                <div class="table-cell">
+                    <span class="label"> <b>overview: </b> </span>
+                    <span class="label" id="overview"> overview </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><div class="bottom-nav-bar">
+                    <a href="{{ url_for('remove_series_from_fav', series_id= 1399) }}">remove from favorite</a> <!--TODO change 1399-->
+                </div></td>
+            <td><div>
+        <nav class="bottom-nav-bar"><a href="#">Presentation</a> | <a href="#">Episodes</a></nav>
+    </div></td>
+        </tr>
+    </table>
+    <!-- Episodes vue-->
+
+
+    <img class="top-right-button btn"
+         src="{{url_for('static',filename='images/cross52x52white-transparent.png')}}"
+         onclick="$('.series_info_block').hide()">
+
+</div>
+<!-- end show series info -->
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; CS 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename='seddikMade.js')}}"></script>
+</body>
+</html>
