@@ -13,6 +13,7 @@ class tmdbException(Exception):
     def __str__(self):
         return repr(self.value)
 
+
 class Series:
     def __init__(self, id):
         self.id = id

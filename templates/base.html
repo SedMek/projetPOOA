@@ -66,19 +66,14 @@
     <div class="row text-center text-lg-left">
         <!-- show favorite series -->
         {% for series in fav_series %}
-<<<<<<< HEAD
-        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id}}>
-            <a href="{{url_for('series_info', series_id= series.id)}}" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
-            </a>
-=======
+
         <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
              >
             <div class="d-block mb-4 h-100">
                 <img class="img-fluid img-thumbnail pointer" onclick="show_info_by_id({{series.id}})"
                      src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </div>
->>>>>>> 29dcc862e68066dad961b35fdcfa9ff7afa94f15
+
         </div>
         {%endfor%}
         <!-- end show favorite series -->
