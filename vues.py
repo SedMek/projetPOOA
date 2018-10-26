@@ -8,6 +8,7 @@ app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
 
 
+
 # this variable should be global so the user can remember the series that he has already added
 
 # temporary functions to be deleted when the mongodb is implemented
@@ -44,17 +45,20 @@ def set_fav_posters(list_of_series):
     """
     posters = []
     for i in range(len(list_of_series)):
-        posters.append(POSTER_PATH + our_tmdb.Series(list_of_series[i]).series_info[
-            "poster_path"])
+
+        posters.append(POSTER_PATH + our_tmdb.Series(list_of_series[i]).poster_path)
+
     return posters
 
 
 @app.route("/")
 def home():
-    fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
-    save_fav_info_json(fav_series)
-    return render_template("index.html", fav_series=fav_series)
+    try:
+        fav_series_ids = get_fav_object()
+        fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
+        return render_template("index.html", fav_series=fav_series)
+    except our_tmdb.tmdbException: return redirect("https://www.google.com")
+
 
 
 @app.route("/searchResult", methods=['GET', 'POST'])
@@ -72,7 +76,9 @@ def search():
                 search_result_code = 1
                 for serie in search_result:
                     try:
-                        id_poster[serie.series_info["id"]] = POSTER_PATH + serie.series_info["poster_path"]
+
+                        id_poster[serie.id] = POSTER_PATH + serie.poster_path
+
                     except:  # some series might not have posters
                         pass
         else:
@@ -113,12 +119,24 @@ def clear_fav():
     return redirect(url_for("home"))
 
 
+
+@app.route("/seriesInfo/<int:series_id>")
+def series_info(series_id):
+    series = our_tmdb.Series(series_id)
+    fav_series_ids = get_fav_object()
+    fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
+    return render_template("series_info.html", series=series, fav_series=fav_series)
+
+
+
 # filters
 @app.template_filter('join_networks')
 def join_networks(series):
     network_names = []
-    for i in range(len(series.series_info["networks"])):
-        network_names.append(series.series_info["networks"][i]["name"])
+
+    for i in range(len(series.networks)):
+        network_names.append(series.networks[i]["name"])
+
     return " &".join(network_names)
 
 
@@ -132,3 +150,4 @@ def fav_series_to_json(fav_series):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
