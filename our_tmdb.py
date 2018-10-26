@@ -5,6 +5,14 @@ api_key = "f3e96aa12213aa6d0925d98470ba6fec"
 api_version = "3"
 POSTER_PATH="https://image.tmdb.org/t/p/w200/"
 
+
+class tmdbException(Exception):
+    """define a class of exceptions to raise in case of invalid requests or response"""
+    def __init__(self,value):
+        self.value=value
+    def __str__(self):
+        return repr(self.value)
+
 class Series:
     def __init__(self, id):
         self.id = id
@@ -12,10 +20,12 @@ class Series:
             id) + '?api_key=' + api_key + '&language=en-US').json()
         self.id = id  # TODO put all the content of serie_infos directly into Serie object
         l=list(self.series_info.keys())
+        """Cette boucle transofrme les attributs du json en attributs de la classe Series"""
         for i in range(len(l)):
             exec("self."+l[i]+"=self.series_info['"+l[i]+"']")
+        if "status_code" in l and int(self.series_info["status_code"])>=2:
+            raise tmdbException(self.series_info["status_message"])
 
-        
 
 
 class Season(Series):

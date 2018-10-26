@@ -76,7 +76,7 @@
         {% for series in fav_series %}
         <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id}}>
             <a href="{{url_for('series_info', series_id= series.id)}}" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.serie_infos['poster_path']}} alt="">
+                <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </a>
         </div>
         {%endfor%}

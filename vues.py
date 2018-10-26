@@ -8,6 +8,7 @@ app.secret_key = "hello".encode()
 
 
 
+
 # this variable should be global so the user can remember the series that he has already added
 
 
@@ -30,22 +31,23 @@ def set_fav_posters(list_of_series):
     """
     posters = []
     for i in range(len(list_of_series)):
-        posters.append(POSTER_PATH + our_tmdb.Serie(list_of_series[i]).serie_infos[
-            "poster_path"])
+        posters.append(POSTER_PATH + our_tmdb.Series(list_of_series[i]).poster_path)
     return posters
 
 
 @app.route("/")
 def home():
-    fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
-    return render_template("index.html", fav_series=fav_series)
+    try:
+        fav_series_ids = get_fav_object()
+        fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
+        return render_template("index.html", fav_series=fav_series)
+    except our_tmdb.tmdbException: return redirect("https://www.google.com")
 
 
 @app.route("/searchResult", methods=['GET', 'POST'])
 def search():
     fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
+    fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
@@ -57,7 +59,7 @@ def search():
                 search_result_code = 1
                 for serie in search_result:
                     try:
-                        id_poster[serie.serie_infos["id"]] = POSTER_PATH + serie.serie_infos["poster_path"]
+                        id_poster[serie.id] = POSTER_PATH + serie.poster_path
                     except:  # some series might not have posters
                         pass
         else:
@@ -100,9 +102,9 @@ def clear_fav():
 
 @app.route("/seriesInfo/<int:series_id>")
 def series_info(series_id):
-    series = our_tmdb.Serie(series_id)
+    series = our_tmdb.Series(series_id)
     fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Serie(i) for i in fav_series_ids]
+    fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     return render_template("series_info.html", series=series, fav_series=fav_series)
 
 
@@ -110,10 +112,11 @@ def series_info(series_id):
 @app.template_filter('join_networks')
 def join_networks(series):
     network_names = []
-    for i in range(len(series.serie_infos["networks"])):
-        network_names.append(series.serie_infos["networks"][i]["name"])
+    for i in range(len(series.networks)):
+        network_names.append(series.networks[i]["name"])
     return " &".join(network_names)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
