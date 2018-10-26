@@ -1,16 +1,16 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, send_from_directory
 import our_tmdb
 import pickle
+import json
 
 app = Flask(__name__)
 app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
 
 
-
 # this variable should be global so the user can remember the series that he has already added
 
-
+# temporary functions to be deleted when the mongodb is implemented
 def get_fav_object():
     with open('static/fav', 'rb') as fav:
         my_unpickler = pickle.Unpickler(fav)
@@ -24,6 +24,20 @@ def save_fav_object(fav_series):
         my_pickler.dump(fav_series)
 
 
+def save_fav_info_json(fav_series):
+    with open('static/fav_info.json', 'w') as fav_info:
+        keys = [series.id for series in fav_series]
+        values = [series.__dict__ for series in fav_series]
+        dic = dict(zip(keys, values))
+        json.dump(dic, fav_info)
+
+
+@app.route("/storage")
+def storage():
+    return app.send_static_file("fav_info.json")
+
+
+# functions to keep
 def set_fav_posters(list_of_series):
     """
     takes a list of series (Id) and returns a list of their posters
@@ -39,6 +53,7 @@ def set_fav_posters(list_of_series):
 def home():
     fav_series_ids = get_fav_object()
     fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
+    save_fav_info_json(fav_series)
     return render_template("index.html", fav_series=fav_series)
 
 
@@ -105,6 +120,14 @@ def join_networks(series):
     for i in range(len(series.series_info["networks"])):
         network_names.append(series.series_info["networks"][i]["name"])
     return " &".join(network_names)
+
+
+@app.template_filter('jsonify')
+def fav_series_to_json(fav_series):
+    keys = [series.id for series in fav_series]
+    values = [series.__dict__ for series in fav_series]
+    dic = dict(zip(keys, values))
+    return dic
 
 
 if __name__ == "__main__":
