@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, send_from_directory
+from flask import Flask, render_template, request, url_for, redirect, Session
 import our_tmdb
 import pickle
 import json
@@ -6,8 +6,8 @@ import json
 app = Flask(__name__)
 app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
-
-
+session = Session();
+session["username"] = "Seddik"
 # this variable should be global so the user can remember the series that he has already added
 
 # temporary functions to be deleted when the mongodb is implemented
@@ -54,7 +54,8 @@ def home():
     fav_series_ids = get_fav_object()
     fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     save_fav_info_json(fav_series)
-    return render_template("index.html", fav_series=fav_series)
+    print(fav_series[0].__dict__)
+    return render_template("index.html", fav_series=fav_series, session = session)
 
 
 @app.route("/searchResult", methods=['GET', 'POST'])
