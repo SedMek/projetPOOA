@@ -62,7 +62,7 @@
 <div class="container">
     {% block search_result %} {% endblock %}
 
-    <h1 class="my-4 text-center text-lg-left">Favorite series Gallery</h1>
+    <h1 class="my-4 text-center text-lg-left text-white">Favorite series Gallery</h1>
     <div class="row text-center text-lg-left">
         <!-- show favorite series -->
         {% for series in fav_series %}
@@ -70,7 +70,7 @@
         <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
              >
             <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail pointer" onclick="show_info_by_id({{series.id}})"
+                <img class="img-fluid img-thumbnail pointer" onclick='show_series_info({{series.__dict__|tojson}});'
                      src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </div>
 
@@ -89,11 +89,11 @@
 </div>
 <!-- /.container -->
 <!-- show series info-->
-<div class="text-white bg-dark series_info_block" id="detailed_1399"> <!--TODO change 1399-->
+<div class="text-white bg-dark series_info_block" id="detailed_id">
     <!-- Presentation vue-->
     <table class="series-info-table" id="presentation">
         <tr>
-            <td class="poster" rowspan="3" width="30%">
+            <td class="poster" rowspan="4" width="30%">
                 <img class="img-fluid img-thumbnail" id="poster"
                      src="https://via.placeholder.com/200x300" alt="">
 
@@ -114,20 +114,27 @@
             </td>
         </tr>
         <tr>
-            <td class="series-overview">
+            <td class="series-genres">
                 <div class="table-cell">
-                    <span class="label"> <b>overview: </b> </span>
-                    <span class="label" id="overview"> overview </span>
+                    <span class="label"> <b>genre(s): </b> </span>
+                    <span class="content" id="genres"> genres </span>
                 </div>
             </td>
         </tr>
         <tr>
-            <td><div class="bottom-nav-bar">
-                    <a href="{{ url_for('remove_series_from_fav', series_id= 1399) }}">remove from favorite</a> <!--TODO change 1399-->
-                </div></td>
-            <td><div>
-        <nav class="bottom-nav-bar"><a href="#">Presentation</a> | <a href="#">Episodes</a></nav>
-    </div></td>
+            <td class="series-overview">
+                <div class="table-cell">
+                    <span class="label"> <b>overview: </b> </span>
+                    <span class="content" id="overview"> overview </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="series-remove">
+                <div class="table-cell text-center">
+                    <a id="remove-link" href="{{ url_for('remove_series_from_fav', series_id=0)}}">remove from favorite</a> <!--TODO change 1399-->
+                </div>
+            </td>
         </tr>
     </table>
     <!-- Episodes vue-->

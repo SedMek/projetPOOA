@@ -13,11 +13,15 @@ function show_series_info(series) {
     };
     genres = genres.substring(0, genres.length-3);
 
+    let remove_link = $("#remove-link").attr("href");
+    remove_link = remove_link.substring(0, remove_link.lastIndexOf("/")+1) + series.id;
+
     $("#poster").attr("src", POSTER_PATH + series.poster_path);
     $("#title").text(series.name);
     $("#networks").text(networks);
     $("#genres").text(genres);
     $("#overview").text(series.overview);
+    $("#remove-link").attr("href", remove_link);
 
     $(".series_info_block").show();
 }
