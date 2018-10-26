@@ -6,17 +6,10 @@ import json
 app = Flask(__name__)
 app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
-<<<<<<< HEAD
-session = Session();
-session["username"] = "Seddik"
-=======
-
-
-
->>>>>>> master
-# this variable should be global so the user can remember the series that he has already added
 
 # temporary functions to be deleted when the mongodb is implemented
+
+
 def get_fav_object():
     with open('static/fav', 'rb') as fav:
         my_unpickler = pickle.Unpickler(fav)
@@ -42,6 +35,7 @@ def save_fav_info_json(fav_series):
 def storage():
     return app.send_static_file("fav_info.json")
 
+
 @app.route("/notify")
 def notify():
     return app.send_static_file("notify.json")
@@ -54,7 +48,6 @@ def set_fav_posters(list_of_series):
     """
     posters = []
     for i in range(len(list_of_series)):
-
         posters.append(POSTER_PATH + our_tmdb.Series(list_of_series[i]).poster_path)
 
     return posters
@@ -62,20 +55,10 @@ def set_fav_posters(list_of_series):
 
 @app.route("/")
 def home():
-<<<<<<< HEAD
     fav_series_ids = get_fav_object()
     fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     save_fav_info_json(fav_series)
-    print(fav_series[0].__dict__)
-    return render_template("index.html", fav_series=fav_series, session = session)
-=======
-    try:
-        fav_series_ids = get_fav_object()
-        fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
-        return render_template("index.html", fav_series=fav_series)
-    except our_tmdb.tmdbException: return redirect("https://www.google.com")
-
->>>>>>> master
+    return render_template("index.html", fav_series=fav_series)
 
 
 @app.route("/searchResult", methods=['GET', 'POST'])
@@ -136,14 +119,12 @@ def clear_fav():
     return redirect(url_for("home"))
 
 
-
 @app.route("/seriesInfo/<int:series_id>")
 def series_info(series_id):
     series = our_tmdb.Series(series_id)
     fav_series_ids = get_fav_object()
     fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     return render_template("series_info.html", series=series, fav_series=fav_series)
-
 
 
 # filters
@@ -167,4 +148,3 @@ def fav_series_to_json(fav_series):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
