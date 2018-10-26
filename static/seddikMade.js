@@ -2,11 +2,11 @@ const POSTER_PATH="https://image.tmdb.org/t/p/w200/";
 let result = null;
 
 
-
+/*
 var stringData = $.ajax({
                     url: "notify",
-                    async: false
-                    dataType: "json"
+                    async: false,
+                    dataType: "json",
                  }).responseText;
 
   //Split values of string data
@@ -17,6 +17,8 @@ alert(stringData);
 
 
 $.getJSON("/storage", function (data) {result = data});
+*/
+
 function show_info_by_id(series_id) {
     let series = result[series_id];
     let networks = "";
