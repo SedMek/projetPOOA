@@ -10,8 +10,8 @@ var stringData = $.ajax({
                  }).responseText;
 
   //Split values of string data
-var stringArray = stringData.split(",");
-alert("Data Loaded: " + stringData);
+//var stringArray = stringData.split(",");
+alert(stringData);
 
 
 
