@@ -22,15 +22,21 @@ class Users(DynamicDocument):
     favouritemovies = ListField(StringField(default=[]))
     
 
+class SeriesData(DynamicDocument):
+    
+    id_serie=StringField(required=True)
+    liste_utilisateur=ListField(StringField(default=[]))
 
+
+    
     
 
 
 #Fonction ajoutant un utilisateur ainsi que ses infos à la base de donnée 
-def ajout_infos_user(first_name,last_name,birthday_day,birthday_month,birthday_year,email,log,passw):
-    birthday_day=str(birthday_day)
-    birthday_month=str(birthday_month)
-    birthday_year=str(birthday_year)
+def ajout_infos_user(first_name,last_name,birthday_day,birthday_month,birthday_year,log,passw):
+    birthday_day=int(birthday_day)
+    birthday_month=int(birthday_month)
+    birthday_year=int(birthday_year)
     user=Users(firstname=first_name,lastname=last_name,birthday=datetime.datetime(birthday_year,birthday_month,birthday_day),login=log,password=passw,favouritemovies="")
     user.save()
 
@@ -48,7 +54,7 @@ def authent(log,mot_de_passe):
     
     a=Users.objects.filter(login=log).count()
     
-    if a != 0 :
+    if a == 0 :
         print("Cet identifiant n'existe pas")
    
     else :
@@ -59,6 +65,8 @@ def authent(log,mot_de_passe):
         
         else:
             return l
+        
+
         
         
 
