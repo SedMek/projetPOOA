@@ -12,6 +12,9 @@
 
     <script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
 
+    <!-- Home made JS and CSS -->
+
+    <link href="{{url_for('static', filename='seddikMade.css')}}" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.min.css')}}"
@@ -27,19 +30,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <form action="/searchResult" method="POST" style="width: 80%">
+        <form action="/searchResult" method="POST">
             <input type="text" name="search" id="searchBar" placeholder="Search..">
-            <!--style for search bar- Added by Seddik-->
-            <style type="text/css">input[type=text] {
-                width: 130px;
-                -webkit-transition: width 0.4s ease-in-out;
-                transition: width 0.4s ease-in-out;
-            }
-
-            /* When the input field gets focus, change its width to 100% */
-            input[type=text]:focus {
-                width: 90%;
-            }</style>
         </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,16 +66,27 @@
     <div class="row text-center text-lg-left">
         <!-- show favorite series -->
         {% for series in fav_series %}
+<<<<<<< HEAD
         <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id}}>
             <a href="{{url_for('series_info', series_id= series.id)}}" class="d-block mb-4 h-100">
                 <img class="img-fluid img-thumbnail" src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
             </a>
+=======
+        <div class="col-lg-3 col-md-4 col-xs-6" id={{series.id|string}}
+             >
+            <div class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail pointer" onclick="show_info_by_id({{series.id}})"
+                     src={{"https://image.tmdb.org/t/p/w200/"+series.series_info['poster_path']}} alt="">
+            </div>
+>>>>>>> 29dcc862e68066dad961b35fdcfa9ff7afa94f15
         </div>
         {%endfor%}
         <!-- end show favorite series -->
+
         <div class="col-lg-3 col-md-4 col-xs-6">
             <a href="#searchBar" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="{{url_for('static', filename='images/plus300x200-filled.jpg')}}" alt="">
+                <img class="img-fluid img-thumbnail"
+                     src="{{url_for('static', filename='images/plus300x200-filled.jpg')}}" alt="">
             </a>
         </div>
     </div>
@@ -91,7 +94,55 @@
 </div>
 <!-- /.container -->
 <!-- show series info-->
-        {% block series_info %} {% endblock %}
+<div class="text-white bg-dark series_info_block" id="detailed_1399"> <!--TODO change 1399-->
+    <!-- Presentation vue-->
+    <table class="series-info-table" id="presentation">
+        <tr>
+            <td class="poster" rowspan="3" width="30%">
+                <img class="img-fluid img-thumbnail" id="poster"
+                     src="https://via.placeholder.com/200x300" alt="">
+
+            </td>
+            <td class="series-title">
+                <div class="table-cell">
+                    <span class="label"> <b> title: </b> </span>
+                    <span class="content" id="title"> title </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="series-networks">
+                <div class="table-cell">
+                    <span class="label"> <b>network(s): </b> </span>
+                    <span class="content" id="networks"> networks </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="series-overview">
+                <div class="table-cell">
+                    <span class="label"> <b>overview: </b> </span>
+                    <span class="label" id="overview"> overview </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><div class="bottom-nav-bar">
+                    <a href="{{ url_for('remove_series_from_fav', series_id= 1399) }}">remove from favorite</a> <!--TODO change 1399-->
+                </div></td>
+            <td><div>
+        <nav class="bottom-nav-bar"><a href="#">Presentation</a> | <a href="#">Episodes</a></nav>
+    </div></td>
+        </tr>
+    </table>
+    <!-- Episodes vue-->
+
+
+    <img class="top-right-button btn"
+         src="{{url_for('static',filename='images/cross52x52white-transparent.png')}}"
+         onclick="$('.series_info_block').hide()">
+
+</div>
 <!-- end show series info -->
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -103,10 +154,7 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<style type="text/css">
-    body {
-        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
-</style>
+
+<script type="text/javascript" src="{{url_for('static', filename='seddikMade.js')}}"></script>
 </body>
 </html>

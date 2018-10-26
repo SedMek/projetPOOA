@@ -18,7 +18,7 @@ class Series:
         self.id = id
         self.series_info = requests.get('https://api.themoviedb.org/' + api_version + '/tv/' + str(
             id) + '?api_key=' + api_key + '&language=en-US').json()
-        self.id = id  # TODO put all the content of serie_infos directly into Serie object
+        self.id = id
         l=list(self.series_info.keys())
         """Cette boucle transofrme les attributs du json en attributs de la classe Series"""
         for i in range(len(l)):
@@ -62,7 +62,7 @@ class Search:
 
 def main():
     got = Series(1399)
-    # pprint(got.series_info)
+    pprint(got.name)
 
 
 if __name__ == "__main__":
