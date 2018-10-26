@@ -89,7 +89,7 @@
 </div>
 <!-- /.container -->
 <!-- show series info-->
-<div class="text-white bg-dark series_info_block" id="detailed_1399"> <!--TODO change 1399-->
+<div class="text-white bg-dark series_info_block" id="detailed_id">
     <!-- Presentation vue-->
     <table class="series-info-table" id="presentation">
         <tr>
@@ -116,7 +116,11 @@
         <tr>
             <td class="series-genres">
                 <div class="table-cell">
+<<<<<<< HEAD
                     <span class="label"> <b>genres: </b> </span>
+=======
+                    <span class="label"> <b>genre(s): </b> </span>
+>>>>>>> master
                     <span class="content" id="genres"> genres </span>
                 </div>
             </td>
@@ -130,10 +134,16 @@
             </td>
         </tr>
         <tr>
+<<<<<<< HEAD
             <td>
                 <div class="bottom-nav-bar">
                     <a href="{{ url_for('remove_series_from_fav', series_id= 1399) }}">remove from favorite</a>
                     <!--TODO change 1399-->
+=======
+            <td class="series-remove">
+                <div class="table-cell text-center">
+                    <a id="remove-link" href="{{ url_for('remove_series_from_fav', series_id=0)}}">remove from favorite</a> <!--TODO change 1399-->
+>>>>>>> master
                 </div>
             </td>
         </tr>

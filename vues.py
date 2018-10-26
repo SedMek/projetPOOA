@@ -42,6 +42,10 @@ def save_fav_info_json(fav_series):
 def storage():
     return app.send_static_file("fav_info.json")
 
+@app.route("/notify")
+def notify():
+    return app.send_static_file("notify.json")
+
 
 # functions to keep
 def set_fav_posters(list_of_series):
