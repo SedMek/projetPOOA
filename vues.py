@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, Session
-import our_tmdb
+import our_tmdb, storage_db
 import pickle
 import json
 
@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
 
+session = Session()
 # temporary functions to be deleted when the mongodb is implemented
 
 
@@ -53,8 +54,32 @@ def set_fav_posters(list_of_series):
     return posters
 
 
-@app.route("/")
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/who")
+def who():
+    return  'Logged in as ' + session["login"]
+
+
+@app.route("/", methods=["GET", "POST"])
 def home():
+    if request.method == "POST":
+        if len(request.form) == 4:  # sign up case
+            storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"], request.form["email"],
+                                        request.form["password"])
+        elif len(request.form) == 2:  # login case
+            try:
+                user_object = storage_db.authent(request.form["email"], request.form["password"])
+                current_user = our_tmdb.User(user_object)
+                session["login"] = current_user.login
+                return current_user.first_name
+            except Exception as e:
+                return str(e)
+        else:  # should never happen
+            raise Exception("This should never be raised")
+
     fav_series_ids = get_fav_object()
     fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     save_fav_info_json(fav_series)
@@ -63,12 +88,13 @@ def home():
 
 @app.route("/searchResult", methods=['GET', 'POST'])
 def search():
-    fav_series_ids = get_fav_object()
-    fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
+    # fav_series_ids = get_fav_object()
+    # fav_series = [our_tmdb.Series(i) for i in fav_series_ids]
     # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":
         if request.form["search"]:  # if the search query is not empty
+            return str(request.form)
             search_result = our_tmdb.Search(request.form["search"]).series
             if len(search_result) == 0:
                 search_result_code = -1
