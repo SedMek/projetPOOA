@@ -20,7 +20,22 @@ class User:
         self.favourite_series = user_object["favourite_series"]
 
     def add_series_to_fav(self, series_id):
-        storage_db.ajout_serie_utilisateur(series_id, self.login)
+        if series_id in self.favourite_series: # if the id already exists, remove it
+            self.favourite_series.remove(series_id)
+
+        self.favourite_series.insert(0, series_id) # always add it in first position
+        storage_db.update_user_fav_series(self)
+
+    def remove_series_from_fav(self, series_id):
+        if series_id in self.favourite_series:
+            self.favourite_series.remove(series_id)
+            storage_db.update_user_fav_series(self)
+
+    def clear_fav(self):
+        #del self.favourite_series[:]
+        self.favourite_series = [ ]
+        storage_db.update_user_fav_series(self)
+
 
 class Series:
     def __init__(self, id):

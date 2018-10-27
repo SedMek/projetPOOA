@@ -12,7 +12,7 @@
 
     <script src="{{url_for('static', filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/jquery/jquery.min.js')}}"></script>
 
-    <!-- Home made JS and CSS -->
+    <!-- Home made CSS -->
 
     <link href="{{url_for('static', filename='seddikMade.css')}}" rel="stylesheet">
 
@@ -48,10 +48,18 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <script type="text/javascript">
+                        function clear_fav() {
+                            let answer = confirm("This will remove all your favorite series from your gallery. Do you want to proceed?");
+                            if (answer) {
+                                window.location.href = '{{url_for("clear_fav")}}';
+                            }
+                        }
+                    </script>
+                    <div class="nav-link pointer" id="clearButton" onclick='clear_fav();'>Clear</div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -132,7 +140,8 @@
         <tr>
             <td class="series-remove">
                 <div class="table-cell text-center">
-                    <a id="remove-link" href="{{ url_for('remove_series_from_fav', series_id=0)}}">remove from favorite</a>
+                    <a id="remove-link" href="{{ url_for('remove_series_from_fav', series_id=0)}}">remove from
+                        favorite</a>
                 </div>
             </td>
         </tr>
