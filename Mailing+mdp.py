@@ -9,6 +9,7 @@ Created on Tue Oct 30 14:50:55 2018
 import smtplib
 import random
 import string
+from storage_db import *
 
 def envoi_mail(id_utilisateur,serie,num_dernier_episode):
     
@@ -31,7 +32,7 @@ def envoi_mail(id_utilisateur,serie,num_dernier_episode):
     
     
 
-def generation_mot_de_passe(id_utilisateur):
+def generation_mot_de_passe():
     l=str()
     for i in range(1):
         l+=random.choice(string.ascii_uppercase)
@@ -41,13 +42,15 @@ def generation_mot_de_passe(id_utilisateur):
         l+=random.choice("123456789")
     return l 
 
-def envoi_mail_changement_mot_de_passe(id_utilisateur):
+
+def envoi_mail_changement_mot_de_passe(id_utilisateur, a):
+    
     
     gmail_user = "envoi.mail.pooa@gmail.com"
     gmail_pwd = "Pooa2019"
     TO = id_utilisateur
     SUBJECT = "Changement de mot de passe"
-    TEXT = "Votre nouveau mot de passe est {}".format(generation_mot_de_passe(id_utilisateur))
+    TEXT = "Votre nouveau mot de passe est {}".format(a)
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
@@ -60,6 +63,11 @@ def envoi_mail_changement_mot_de_passe(id_utilisateur):
     server.sendmail(gmail_user, [TO], BODY)
     print ('email sent')
     
+def update_mdp_bdd(id_utilisateur,a):
+    user=User.objects.get(login=id_utilisateur)
+    user.password=a
+    user.save()
+
 
     
 
