@@ -1,20 +1,36 @@
 const POSTER_PATH="https://image.tmdb.org/t/p/w200/";
-/*
+
+console.log("hey")
+
+
+
 var stringData = $.ajax({
-                    url: "notify",
-                    async: false,
-                    dataType: "json",
+                    url: "/notify",
+                    async: false
+
                  }).responseText;
+var dico = JSON.parse(stringData);
 
-  //Split values of string data
-//var stringArray = stringData.split(",");
-alert(stringData);
+let i=0;
+
+alert("Trois notifications de démonstration vont arriver dans peu de temps ! Le reste des notifications va dépendre de vos ajouts de séries ;) " +
+    " Voir le fichier static/notify.json et le fichier venv/notifications_observer_pattern pour comprendre le système de notification");
 
 
+var notif=setInterval(new_notif, 7000);
+
+function new_notif() {
+
+    if (i<=2) {
+    var user = "user_" + i.toString();
+
+    alert(eval("dico." + user));
+    i++
+    }
+
+}
 
 
-$.getJSON("/storage", function (data) {result = data});
-*/
 
 function show_series_info(series) {
     let networks = "";
