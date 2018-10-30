@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import our_tmdb, storage_db
 import os
 
-
 app = Flask(__name__)
 app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
@@ -56,7 +55,7 @@ def home():
             return render_template("error.html", error_msg=str(e))
     try:
         current_user = our_tmdb.User(session["current_user"])
-    except: #if no one is logged in, redirect to login page
+    except:  # if no one is logged in, redirect to login page
         return redirect(url_for("login"))
     fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
     return render_template("index.html", fav_series=fav_series)
@@ -132,6 +131,25 @@ def fav_series_to_json(fav_series):
     values = [series.__dict__ for series in fav_series]
     dic = dict(zip(keys, values))
     return dic
+
+
+@app.template_filter('duration')
+def time_counter(list_of_series):
+    counter = 0
+    duration = ""
+    for element in list_of_series:
+        counter += element.number_of_episodes * element.episode_run_time[0]
+    days = counter // (24*60)
+    hours = (counter % (24*60)) // 60
+    mins = counter % 60
+    if days:
+        duration = str(days) + " days "
+    if hours:
+        duration = duration + str(hours) + " hours "
+    if mins:
+        duration = duration + str(mins) + " minutes"
+
+    return duration
 
 
 if __name__ == "__main__":
