@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
 .pointer {
@@ -71,6 +71,12 @@ body {
     height: 10%;
 }
 
+.series-genres {
+    vertical-align: top;
+    padding-left: 20px;
+    height: 10%;
+}
+
 .bottom-nav-bar {
     text-align: center;
     position: relative;
@@ -81,10 +87,5 @@ body {
     overflow: auto;
 }
 
-/*
-    table, th, td {
-        border: 1px solid black;
-    }
-*/
 
 
