@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.min.css')}}"
+          rel="stylesheet">
+    <!-- Home made CSS -->
+    <link href="{{url_for('static', filename='seddikMade.css')}}" rel="stylesheet">
+
+    <title>Error</title>
+</head>
+<body>
+<h1 class="my-4 text-left text-white" style="padding-left: 30px">{{error_msg}}</h1>
+<a href='{{url_for("login")}}' style="padding-left: 30px">Retry sign up / login </a>
+</body>
+</html>
