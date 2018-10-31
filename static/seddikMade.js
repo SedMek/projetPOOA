@@ -1,7 +1,5 @@
 const POSTER_PATH="https://image.tmdb.org/t/p/w200/";
 
-console.log("hey")
-
 
 
 var stringData = $.ajax({
