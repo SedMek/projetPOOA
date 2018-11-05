@@ -41,3 +41,7 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
   
 });
+
+document.getElementById("forgot_password_link").onclick = function() {
+    document.getElementById("forgot_password_form").submit();
+}

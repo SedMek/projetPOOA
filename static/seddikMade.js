@@ -122,3 +122,4 @@ function hide_info_block() {
     $("#main").hide();
     $(".series_info_block").hide();
 }
+

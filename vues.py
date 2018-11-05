@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-import our_tmdb, storage_db
+import our_tmdb, storage_db, methods
 import os
 
 app = Flask(__name__)
@@ -17,6 +17,18 @@ def notify():
 @app.route("/login")
 def login():
     return render_template("login.html")
+
+
+@app.route("/forgot_password", methods=["POST"])
+def forgot_password():
+    if request.method == "POST":
+        user_email = request.form["email"]
+        new_password = methods.generate_password()
+        methods.send_password_mail(user_email, new_password)
+        methods.update_password_in_db(user_email, new_password)
+    else:  # should never happen
+        pass
+    return render_template("forgot_password.html", email=user_email)
 
 
 @app.route('/logout')
@@ -74,11 +86,9 @@ def search():
                 search_result_code = -1
             else:
                 search_result_code = 1
-                for serie in search_result:
+                for series in search_result:
                     try:
-
-                        id_poster[serie.id] = POSTER_PATH + serie.poster_path
-
+                        id_poster[series.id] = POSTER_PATH + series.poster_path
                     except:  # some series might not have posters
                         pass
         else:
@@ -117,12 +127,7 @@ def clear_fav():
 # filters
 @app.template_filter('join_networks')
 def join_networks(series):
-    network_names = []
-
-    for i in range(len(series.networks)):
-        network_names.append(series.networks[i]["name"])
-
-    return " &".join(network_names)
+    return methods.join_networks(series)
 
 
 @app.template_filter('jsonify')
@@ -135,21 +140,7 @@ def fav_series_to_json(fav_series):
 
 @app.template_filter('duration')
 def time_counter(list_of_series):
-    counter = 0
-    duration = ""
-    for element in list_of_series:
-        counter += element.number_of_episodes * element.episode_run_time[0]
-    days = counter // (24*60)
-    hours = (counter % (24*60)) // 60
-    mins = counter % 60
-    if days:
-        duration = str(days) + " days "
-    if hours:
-        duration = duration + str(hours) + " hours "
-    if mins:
-        duration = duration + str(mins) + " minutes"
-
-    return duration
+    return methods.time_counter(list_of_series)
 
 
 if __name__ == "__main__":
