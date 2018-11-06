@@ -136,7 +136,7 @@ window.onload = function() {
         var container_block ;
         block_to_insert = document.createElement( 'li');
         block_to_insert.innerHTML = "<b id=\"notif_0\">"+eval("dico." + current_user + "[" + i.toString() + "][0]")+"</b>\n" +
-            "<p>"+eval("dico." + current_user + "[" + i.toString() + "][1]")+"</p>" ;
+            "<p + style='text-align: right;'>"+eval("dico." + current_user + "[" + i.toString() + "][1]")+"</p>" ;
         block_to_insert.setAttribute("class","menu-item");
 
         container_block = document.getElementById( 'notification-menu' );

@@ -98,8 +98,10 @@ class ConcreteObserver(Observer):
                     for user in series_users[e]:
                         # le signe @ pose des problèmes pour JS dans les  navigateurs web
                         print(user)
-                        d[user.split('@')[0]]=["Nouvelle épisode de %s ! "%our_tmdb.Series(e).name,
-                                 str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute)]
+                        try: d[user.split('@')[0]].insert(0,["Nouvelle episode de %s ! "%our_tmdb.Series(e).name,
+                                     str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute)])
+                        except: d[user.split('@')[0]] = [["Nouvelle episode de %s ! " % our_tmdb.Series(e).name,
+                                     str(datetime.datetime.now().hour) + ":" + str( datetime.datetime.now().minute)]]
                         print(d)
             except: pass
         f=open("notify.json","w")
