@@ -6,7 +6,8 @@ Created on Tue Oct 23 15:56:43 2018
 @author: souheillassouad
 """
 
-from mongoengine import connect, DynamicDocument, StringField, DateTimeField, ListField, IntField, DoesNotExist
+from mongoengine import connect, DynamicDocument, StringField, BooleanField, ListField, IntField, DoesNotExist
+
 import our_tmdb
 import os
 
@@ -35,6 +36,8 @@ class User(DynamicDocument):
     login = StringField(required=True)
     password = StringField(required=True)
     favourite_series = ListField(IntField(default=[]))
+    email_notifications = BooleanField(required=True)
+    browser_notifications = BooleanField(required=True)
 
 
 class SeriesData(DynamicDocument):
@@ -46,9 +49,8 @@ class SeriesData(DynamicDocument):
 # Fonction ajoutant un utilisateur ainsi que ses infos à la base de donnée
 def ajout_infos_user(first_name, last_name, log, passw):
     if User.objects.filter(login=log).count() == 0:
-        user = User(first_name=first_name, last_name=last_name,
-                    login=log, password=passw,
-                    favourite_series=[])
+        user = User(first_name=first_name, last_name=last_name, login=log, password=passw, favourite_series=[],
+                    email_notifications=True, browser_notifications=True)
         user.save()
     else:
         raise LoginAlreadyUsedException("This login is already used. Please use another one!")
@@ -62,15 +64,16 @@ def update_user_fav_series(tmdb_user):
     except DoesNotExist:
         raise UserNotFoundException("l'utilisateur n'exite pas")
 
+
 # Fonction rajoutant une série à la liste de séries favoris d'un utilisteur
 def ajout_id_serie_to_fav(id_serie, login_user):
     try:
         l = User.objects.get(login=login_user)
 
-        if id_serie in l.favourite_series: # if the id already exists, remove it
+        if id_serie in l.favourite_series:  # if the id already exists, remove it
             l.favourite_series.remove(id_serie)
 
-        l.favourite_series.insert(0, id_serie) # always add it in first position
+        l.favourite_series.insert(0, id_serie)  # always add it in first position
         l.save()
     except DoesNotExist:
         raise UserNotFoundException("l'utilisateur n'exite pas")
@@ -89,8 +92,7 @@ def authent(log, mot_de_passe):
         raise UserNotFoundException("l'utilisateur n'exite pas")
 
 
-
-# Fonction qui cherche dans la collection série si une série et crée, la crée si elle existe pas 
+# Fonction qui cherche dans la collection série si une série et crée, la crée si elle existe pas
 # et rajoute l'identifiant de l'utilisateur à la liste  liste_utilisateur      
 
 def ajout_serie_utilisateur(idSerie, idUtilisateur):
@@ -103,3 +105,19 @@ def ajout_serie_utilisateur(idSerie, idUtilisateur):
         l = SeriesData.objects.filter(id_serie=idSerie)
         l.liste_utilisateur.append(idUtilisateur)
         l.save()
+
+
+def update_password_in_db(user_id, new_password):
+    user = User.objects.get(login=user_id)
+    user.password = new_password
+    user.save()
+
+
+def update_notification_settings(tmdb_user):
+    try:
+        l = User.objects.get(login=tmdb_user.login)
+        l.email_notifications = tmdb_user.email_notifications
+        l.browser_notifications = tmdb_user.browser_notifications
+        l.save()
+    except DoesNotExist:
+        raise UserNotFoundException("l'utilisateur n'exite pas")
