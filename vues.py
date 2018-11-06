@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-import our_tmdb, storage_db
+import our_tmdb, storage_db, methods
 import os
-
 
 app = Flask(__name__)
 app.secret_key = "hello".encode()
@@ -20,6 +19,27 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/forgot_password", methods=["POST"])
+def forgot_password():
+    user_email = None
+    if request.method == "POST":
+        if request.form["email"]:
+            user_email = request.form["email"]
+            new_password = methods.generate_password()
+            methods.send_password_mail(user_email, new_password)
+            storage_db.update_password_in_db(user_email, new_password)
+        else:  # should never happen
+            pass
+    return render_template("forgot_password.html", email=user_email)
+
+
+@app.route('/settings')
+def settings():
+    current_user = our_tmdb.User(session["current_user"])
+    return render_template("settings.html", email_notifications=current_user.email_notifications,
+                           browser_notifications=current_user.browser_notifications, email=current_user.login)
+
+
 @app.route('/logout')
 def logout():
     # remove the username from the session if it is there
@@ -30,7 +50,7 @@ def logout():
 @app.route("/who")
 def who():
     current_user = our_tmdb.User(session["current_user"])
-    return current_user.login
+    return str(current_user.__dict__)
 
 
 @app.route("/mongo")
@@ -41,22 +61,27 @@ def mongo():
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        if len(request.form) == 4:  # sign up case
+        if 'email' in request.form.keys():  # login or sign up case
+            if "first_name" in request.form.keys():  # sign up case
+                try:
+                    storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"],
+                                                request.form["email"], request.form["password"])
+                except storage_db.LoginAlreadyUsedException as e:
+                    return render_template("error.html", error_msg=str(e))
+            # trying to login, works for both new created account or already created account
             try:
-                storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"],
-                                            request.form["email"], request.form["password"])
-            except storage_db.LoginAlreadyUsedException as e:
+                user_object = storage_db.authent(request.form["email"], request.form["password"])
+                current_user = our_tmdb.User(user_object)
+                session["current_user"] = current_user.__dict__
+            except Exception as e:
                 return render_template("error.html", error_msg=str(e))
-        # trying to login, works for both new created account or already created account
-        try:
-            user_object = storage_db.authent(request.form["email"], request.form["password"])
-            current_user = our_tmdb.User(user_object)
+        else:  # settings update case
+            current_user = our_tmdb.User(session["current_user"])
+            current_user.update_settings(**request.form.to_dict())
             session["current_user"] = current_user.__dict__
-        except Exception as e:
-            return render_template("error.html", error_msg=str(e))
     try:
         current_user = our_tmdb.User(session["current_user"])
-    except: #if no one is logged in, redirect to login page
+    except:  # if no one is logged in, redirect to login page
         return redirect(url_for("login"))
     fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
     return render_template("index.html", fav_series=fav_series)
@@ -75,17 +100,15 @@ def search():
                 search_result_code = -1
             else:
                 search_result_code = 1
-                for serie in search_result:
+                for series in search_result:
                     try:
-
-                        id_poster[serie.id] = POSTER_PATH + serie.poster_path
-
+                        id_poster[series.id] = POSTER_PATH + series.poster_path
                     except:  # some series might not have posters
                         pass
         else:
             search_result_code = -2
     if request.method == "GET":
-        pass  # TODO
+        pass # TODO handel Exception
 
     return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
                            fav_series=fav_series)
@@ -118,12 +141,7 @@ def clear_fav():
 # filters
 @app.template_filter('join_networks')
 def join_networks(series):
-    network_names = []
-
-    for i in range(len(series.networks)):
-        network_names.append(series.networks[i]["name"])
-
-    return " &".join(network_names)
+    return methods.join_networks(series)
 
 
 @app.template_filter('jsonify')
@@ -132,6 +150,11 @@ def fav_series_to_json(fav_series):
     values = [series.__dict__ for series in fav_series]
     dic = dict(zip(keys, values))
     return dic
+
+
+@app.template_filter('duration')
+def time_counter(list_of_series):
+    return methods.time_counter(list_of_series)
 
 
 if __name__ == "__main__":

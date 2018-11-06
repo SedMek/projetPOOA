@@ -18,6 +18,8 @@ class User:
         self.last_name = user_object["last_name"]
         self.login = user_object["login"]
         self.favourite_series = user_object["favourite_series"]
+        self.email_notifications = user_object["email_notifications"]
+        self.browser_notifications = user_object["browser_notifications"]
 
     def add_series_to_fav(self, series_id):
         if series_id in self.favourite_series: # if the id already exists, remove it
@@ -32,9 +34,16 @@ class User:
             storage_db.update_user_fav_series(self)
 
     def clear_fav(self):
-        #del self.favourite_series[:]
         self.favourite_series = [ ]
         storage_db.update_user_fav_series(self)
+
+    def update_settings(self, **kwargs):
+        self.email_notifications = "checkbox-email" in kwargs.keys()
+        self.browser_notifications = "checkbox-browser" in kwargs.keys()
+        storage_db.update_notification_settings(self)
+        if kwargs["new_password"]:
+            storage_db.update_password_in_db(self.login, kwargs["new_password"])
+
 
 
 class Series:

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--
+<style type="text/css">table, th, td {
+   border: 1px solid black;
+}
+</style>
+-->
 <head>
 
 
@@ -55,7 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{{url_for('settings')}}">Settings</a>
                 </li>
                 <li class="nav-item">
                     <script type="text/javascript">
@@ -123,7 +128,8 @@
 <div class="container">
     {% block search_result %} {% endblock %}
 
-    <h1 class="my-4 text-center text-lg-left text-white">Favorite series Gallery</h1>
+    <h1 class="my-4 text-center text-lg-left text-white" id="gallery_title">Favorite series Gallery</h1>
+    <span class="text-white" id="time_spent">You have spent <b>{{fav_series|duration}}</b> watching this!</span>
     <div class="row text-center text-lg-left">
         <!-- show favorite series -->
         {% for series in fav_series %}
@@ -150,7 +156,7 @@
 </div>
 <!-- /.container -->
 <!-- show series info-->
-<div class="text-white bg-dark series_info_block" id="detailed_id">
+<div class="text-white bg-dark series_info_block">
     <!-- Presentation vue-->
     <table class="series-info-table" id="presentation">
         <tr>
@@ -199,19 +205,58 @@
             </td>
         </tr>
     </table>
-    <!-- Episodes vue-->
+    <!-- Seasons vue-->
+    <div id="seasons">
+        <div id="mySidenav" class="sidenav"></div>
+        <div id="main">
+            <table class="series-info-table" id="season">
+                <tr>
+                    <td class="poster" rowspan="3" width="30%">
+                        <img class="img-fluid img-thumbnail" id="season_poster"
+                             src="https://via.placeholder.com/200x300" alt="">
+                    </td>
+                    <td class="series-title">
+                        <div class="table-cell">
+                            <span class="label"> <b> title: </b> </span>
+                            <span class="content" id="season_title"> title </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="series-networks">
+                        <div class="table-cell">
+                            <span class="label"> <b>air date: </b> </span>
+                            <span class="content" id="season_air_date"> air date </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="series-overview">
+                        <div class="table-cell">
+                            <span class="label"> <b>overview: </b> </span>
+                            <span class="content" id="season_overview"> overview </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-
+    <!-- Close button & nav bar -->
     <img class="top-right-button btn"
          src="{{url_for('static',filename='images/cross52x52white-transparent.png')}}"
-         onclick="$('.series_info_block').hide()">
+         onclick="hide_info_block()">
+    <div class="bottom-nav-bar">
+        <span onclick="display_presentation()">Presentation</span> | <span onclick="display_seasons()">Seasons</span>
+
+    </div>
 
 </div>
 <!-- end show series info -->
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; CS 2018</p>
+        <p class="m-0 text-center text-white">Powered by TheMovieDB</p>
     </div>
     <!-- /.container -->
 </footer>
