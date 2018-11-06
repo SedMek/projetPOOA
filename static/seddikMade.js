@@ -4,29 +4,48 @@ console.log("hey")
 
 
 
-var stringData = $.ajax({
+
+
+var notif_json = $.ajax({
                     url: "/notify",
                     async: false
 
                  }).responseText;
-var dico = JSON.parse(stringData);
+
+// var current_user= $.ajax({
+//                     url: "/who",
+//                     async: false
+//
+//                  }).responseText;
+
+
+var dico = JSON.parse(notif_json);
 
 let i=0;
+let seen=0;
 
-alert("Trois notifications de démonstration vont arriver dans peu de temps ! Le reste des notifications va dépendre de vos ajouts de séries ;) " +
-    " Voir le fichier static/notify.json et le fichier venv/notifications_observer_pattern pour comprendre le système de notification");
+/*
+alert("Trois notifications de démonstration vont arriver dans peu de temps ! Le reste des notifications va dépendre de vos ajouts de séries ;) Cliquez sur la cloche pour les visualiser et  " +
+    " voir le fichier static/notify.json et le fichier venv/notifications_observer_pattern pour comprendre le système de notification");
+*/
+
+//var notif=setInterval(new_notif, 1000);
 
 
-var notif=setInterval(new_notif, 7000);
+
+
+
+
 
 function new_notif() {
 
     if (i<=2) {
-    var user = "user_" + i.toString();
+    var demo = "demo_" + i.toString();
 
-    alert(eval("dico." + user));
+    alert(eval("dico." + demo));
     i++
     }
+
 
 }
 
@@ -56,4 +75,42 @@ function show_series_info(series) {
     $("#remove-link").attr("href", remove_link);
 
     $(".series_info_block").show();
+}
+
+var main = function() {
+  $('.notification img').click(function() {
+    $('.notification-menu').toggle();
+  });
+
+  $('.post .btn').click(function() {
+    $(this).toggleClass('btn-like');
+  });
+};
+$(document).ready(main);
+
+
+let current_user="demo_user";
+let number_of_notifications=eval("dico."+current_user+".length");
+
+
+window.onload = function() {
+
+
+   document.getElementById("notification").setAttribute("data-badge", number_of_notifications);
+
+    console.log("dico." + current_user+"[0]");
+   for (var i=0; i<eval("dico."+current_user+".length"); i++)
+    {
+        var block_to_insert ;
+        var container_block ;
+        block_to_insert = document.createElement( 'li');
+        block_to_insert.innerHTML = "<b id=\"notif_0\">"+eval("dico." + current_user + "[" + i.toString() + "][0]")+"</b>\n" +
+            "<p>"+eval("dico." + current_user + "[" + i.toString() + "][1]")+"</p>" ;
+        block_to_insert.setAttribute("class","menu-item");
+
+        container_block = document.getElementById( 'notification-menu' );
+        container_block.appendChild( block_to_insert );
+
+        // document.getElementById("notif_"+i.toString()).innerHTML = eval("dico." + current_user + "[" + i.toString() + "][0]");
+    }
 }

@@ -10,7 +10,7 @@ POSTER_PATH = our_tmdb.POSTER_PATH
 
 @app.route("/notify")
 def notify():
-    return app.send_static_file("notify.json")
+    return app.send_static_file("data/notifications_data/notify.json")
 
 
 # functions to keep
