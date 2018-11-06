@@ -21,14 +21,23 @@ def login():
 
 @app.route("/forgot_password", methods=["POST"])
 def forgot_password():
+    user_email = None
     if request.method == "POST":
-        user_email = request.form["email"]
-        new_password = methods.generate_password()
-        methods.send_password_mail(user_email, new_password)
-        methods.update_password_in_db(user_email, new_password)
-    else:  # should never happen
-        pass
+        if request.form["email"]:
+            user_email = request.form["email"]
+            new_password = methods.generate_password()
+            methods.send_password_mail(user_email, new_password)
+            storage_db.update_password_in_db(user_email, new_password)
+        else:  # should never happen
+            pass
     return render_template("forgot_password.html", email=user_email)
+
+
+@app.route('/settings')
+def settings():
+    current_user = our_tmdb.User(session["current_user"])
+    return render_template("settings.html", email_notifications=current_user.email_notifications,
+                           browser_notifications=current_user.browser_notifications, email=current_user.login)
 
 
 @app.route('/logout')
@@ -41,7 +50,7 @@ def logout():
 @app.route("/who")
 def who():
     current_user = our_tmdb.User(session["current_user"])
-    return current_user.login
+    return str(current_user.__dict__)
 
 
 @app.route("/mongo")
@@ -52,19 +61,24 @@ def mongo():
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        if len(request.form) == 4:  # sign up case
+        if 'email' in request.form.keys():  # login or sign up case
+            if "first_name" in request.form.keys():  # sign up case
+                try:
+                    storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"],
+                                                request.form["email"], request.form["password"])
+                except storage_db.LoginAlreadyUsedException as e:
+                    return render_template("error.html", error_msg=str(e))
+            # trying to login, works for both new created account or already created account
             try:
-                storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"],
-                                            request.form["email"], request.form["password"])
-            except storage_db.LoginAlreadyUsedException as e:
+                user_object = storage_db.authent(request.form["email"], request.form["password"])
+                current_user = our_tmdb.User(user_object)
+                session["current_user"] = current_user.__dict__
+            except Exception as e:
                 return render_template("error.html", error_msg=str(e))
-        # trying to login, works for both new created account or already created account
-        try:
-            user_object = storage_db.authent(request.form["email"], request.form["password"])
-            current_user = our_tmdb.User(user_object)
+        else:  # settings update case
+            current_user = our_tmdb.User(session["current_user"])
+            current_user.update_settings(**request.form.to_dict())
             session["current_user"] = current_user.__dict__
-        except Exception as e:
-            return render_template("error.html", error_msg=str(e))
     try:
         current_user = our_tmdb.User(session["current_user"])
     except:  # if no one is logged in, redirect to login page
@@ -94,7 +108,7 @@ def search():
         else:
             search_result_code = -2
     if request.method == "GET":
-        pass  # TODO
+        pass # TODO handel Exception
 
     return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
                            fav_series=fav_series)

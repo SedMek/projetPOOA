@@ -54,12 +54,6 @@ def send_password_mail(user_mail, new_password):
     print('email sent')
 
 
-def update_password_in_db(user_id, new_password):
-    user = User.objects.get(login=user_id)
-    user.password = new_password
-    user.save()
-
-
 def time_counter(list_of_series):
     counter = 0
     duration = ""
@@ -75,7 +69,10 @@ def time_counter(list_of_series):
     if mins:
         duration = duration + str(mins) + " minutes"
 
-    return duration
+    if duration:
+        return duration
+    else:
+        return "0 mins"
 
 
 def join_networks(series):

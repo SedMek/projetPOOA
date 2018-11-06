@@ -74,14 +74,12 @@ h1 {
 }
 
 label {
-  position: absolute;
   -webkit-transform: translateY(6px);
           transform: translateY(6px);
   left: 13px;
   color: rgba(255, 255, 255, 0.5);
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
-  pointer-events: none;
   font-size: 22px;
 }
 label .req {
@@ -105,9 +103,6 @@ label.highlight {
 
 input, textarea {
   font-size: 22px;
-  display: block;
-  width: 100%;
-  height: 100%;
   padding: 5px 10px;
   background: none;
   background-image: none;
@@ -171,4 +166,13 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+.margin-top-left{
+    margin-left: 50px;
+    margin-top: 75px;
+}
+
+#forgot_password_form input{
+    width: 300px;
 }

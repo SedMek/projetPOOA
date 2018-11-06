@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static',filename='startbootstrap-thumbnail-gallery-gh-pages/vendor/bootstrap/css/bootstrap.min.css')}}"
+          rel="stylesheet">
+    <!-- Home made CSS -->
+    <link href="{{url_for('static', filename='seddikMade.css')}}" rel="stylesheet">
+    <!--settings template css-->
+    <link rel="stylesheet" href="{{url_for('static', filename='settings-template/style.css')}}">
+
+</head>
+<body class="margin-top-left">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('home')}}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('settings')}}">Settings
+                    <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <script type="text/javascript">
+                        function clear_fav() {
+                            let answer = confirm("This will remove all your favorite series from your gallery. Do you want to proceed?");
+                            if (answer) {
+                                window.location.href = '{{url_for("clear_fav")}}';
+                            }
+                        }
+                    </script>
+                    <div class="nav-link pointer" id="clearButton" onclick='clear_fav();'>Clear</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <form class="form-horizontal" action="/" method="post">
+        <fieldset>
+            <h3 class="text-white">Account Settings</h3>
+            <!-- Password input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label text-white" for="password_input">new password</label>
+                <div class="col-md-4">
+                    <input id="password_input" name="new_password" type="password" placeholder="new password"
+                           class="form-control input-md" autocomplete="false">
+
+                </div>
+            </div>
+
+            <h3 class="text-white">Notification Settings</h3>
+            <!-- Multiple Checkboxes -->
+            <div class="form-group">
+                <div class="text-white">
+                    <div class="checkbox">
+                        <label for="checkboxes-0">
+                            <input type="checkbox" name="checkbox-email" id="checkboxes-0" {%if email_notifications%} checked {%endif%}>
+                            get email notifications
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="checkboxes-1">
+                            <input type="checkbox" name="checkboxe-browser" id="checkboxes-1" {%if browser_notifications%} checked {%endif%}>
+                            get browser notifications
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- submit button-->
+            <button type="submit" class="button button-block">Update settings</button>
+        </fieldset>
+    </form>
+
+</div>
+</body>
+</html>
