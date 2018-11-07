@@ -7,10 +7,14 @@ Created on Tue Oct 23 15:56:43 2018
 """
 
 from mongoengine import connect, DynamicDocument, StringField, BooleanField, ListField, IntField, DoesNotExist
-import datetime
-import our_tmdb
 
-connect('pooa_project_db', host='localhost', port=27017)  # pour l'instant localhost, voir comment changer par la suite
+import our_tmdb
+import os
+
+#MONGODB_URI = os.environ["MONGODB_URI"]
+#connect('pooa_project_db', host=MONGODB_URI)  # pour l'instant localhost, voir comment changer par la suite
+
+connect('pooa_project_db', host='localhost', port=27017)  # for local dev
 
 
 class UserNotFoundException(Exception):
