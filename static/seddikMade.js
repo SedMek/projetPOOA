@@ -49,6 +49,8 @@ function new_notif() {
 
 }
 
+
+
 function fill_series_info(series) {
     /* presentation vue */
     let networks = "";
