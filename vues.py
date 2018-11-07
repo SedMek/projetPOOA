@@ -108,11 +108,10 @@ def search():
                         pass
         else:
             search_result_code = -2
-    if request.method == "GET":
-        pass # TODO handel Exception
-
-    return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
-                           fav_series=fav_series)
+        return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
+                               fav_series=fav_series)
+    else:
+        return render_template("error.html", error_msg="This should never happen (GET request or no request)", login_error=True)
 
 
 @app.route("/addSeries/<int:series_id>")
