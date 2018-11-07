@@ -87,48 +87,36 @@ def home():
 
 @app.route("/searchResult", methods=['GET', 'POST'])
 def search():
+    # Getting the user info that are stored in the session cookie
     current_user = our_tmdb.User(session["current_user"])
-    try:
+
+    try:  # trying to get the series that are already favourite
         fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
-    except our_tmdb.tmdbException as e:
+    except our_tmdb.tmdbException as e:  # showing an error when the API limit is reached
         return render_template("error.html", error_msg=str(e), login_error=False)
-    # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
+
     id_poster = dict()
-    if request.method == "POST":
-        if request.form["search"]:  # if the search query is not empty
-            search_result = our_tmdb.Search(request.form["search"]).series
-            if len(search_result) == 0:
-                search_result_code = -1
-            else:
-                search_result_code = 1
-                for series in search_result:
-                    try:
-                        id_poster[series.id] = POSTER_PATH + series.poster_path
-                    except:  # some series might not have posters
-                        pass
-        else:
-            search_result_code = -2
-        return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
-                               fav_series=fav_series)
-    elif request.method == "GET":
+    if request.method == "GET":
         if request.args["search"]:  # if the search query is not empty
-            try:
+            try:  # trying to get thhe series that are the result of the search
                 search_result = our_tmdb.Search(request.args["search"]).series
-            except our_tmdb.tmdbException as e:
+            except our_tmdb.tmdbException as e:  # showing an error when the API limit is reached
                 return render_template("error.html", error_msg=str(e), login_error=False)
+
             if len(search_result) == 0:
-                search_result_code = -1
+                search_result_code = -1  # -1 for search without results
             else:
-                search_result_code = 1
+                search_result_code = 1  # 1 for search with results
                 for series in search_result:
                     try:
                         id_poster[series.id] = POSTER_PATH + series.poster_path
                     except:  # some series might not have posters
-                        pass
+                        pass  # we will not display these series
         else:
-            search_result_code = -2
+            search_result_code = -2  # -2 for empty search
         return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
                                fav_series=fav_series)
+
 
 @app.route("/addSeries/<int:series_id>")
 def add_series_to_fav(series_id):
