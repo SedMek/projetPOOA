@@ -112,7 +112,10 @@ def search():
                                fav_series=fav_series)
     elif request.method == "GET":
         if request.args["search"]:  # if the search query is not empty
-            search_result = our_tmdb.Search(request.args["search"]).series
+            try:
+                search_result = our_tmdb.Search(request.args["search"]).series
+            except our_tmdb.tmdbException as e:
+                return render_template("error.html", error_msg=str(e), login_error=False)
             if len(search_result) == 0:
                 search_result_code = -1
             else:
