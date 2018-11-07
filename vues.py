@@ -53,11 +53,6 @@ def who():
     return str(current_user.__dict__)
 
 
-@app.route("/mongo")
-def mongo():
-    return os.environ['MONGODB_URI']
-
-
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
@@ -83,14 +78,20 @@ def home():
         current_user = our_tmdb.User(session["current_user"])
     except:  # if no one is logged in, redirect to login page
         return redirect(url_for("login"))
-    fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
+    try:
+        fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
+    except our_tmdb.tmdbException as e:
+        return render_template("error.html", error_msg=str(e))
     return render_template("index.html", fav_series=fav_series)
 
 
 @app.route("/searchResult", methods=['GET', 'POST'])
 def search():
     current_user = our_tmdb.User(session["current_user"])
-    fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
+    try:
+        fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
+    except our_tmdb.tmdbException as e:
+        return render_template("error.html", error_msg=str(e))
     # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":

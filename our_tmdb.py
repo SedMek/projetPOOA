@@ -22,10 +22,10 @@ class User:
         self.browser_notifications = user_object["browser_notifications"]
 
     def add_series_to_fav(self, series_id):
-        if series_id in self.favourite_series: # if the id already exists, remove it
+        if series_id in self.favourite_series:  # if the id already exists, remove it
             self.favourite_series.remove(series_id)
 
-        self.favourite_series.insert(0, series_id) # always add it in first position
+        self.favourite_series.insert(0, series_id)  # always add it in first position
         storage_db.update_user_fav_series(self)
 
     def remove_series_from_fav(self, series_id):
@@ -34,7 +34,7 @@ class User:
             storage_db.update_user_fav_series(self)
 
     def clear_fav(self):
-        self.favourite_series = [ ]
+        self.favourite_series = []
         storage_db.update_user_fav_series(self)
 
     def update_settings(self, **kwargs):
@@ -43,7 +43,6 @@ class User:
         storage_db.update_notification_settings(self)
         if kwargs["new_password"]:
             storage_db.update_password_in_db(self.login, kwargs["new_password"])
-
 
 
 class Series:
@@ -77,7 +76,8 @@ class Episode(Season):
             'https://api.themoviedb.org/' + api_version + '/tv/' + str(id) + '/season/' + str(
                 season_number) + '/episode/' + str(episode_number) + '?api_key=' + api_key + '&language=en-US').json()
         print('https://api.themoviedb.org/' + api_version + '/tv/' + str(id) + '/season/' + str(
-                season_number) + '/episode/' + str(episode_number) + '?api_key=' + api_key + '&language=en-US')
+            season_number) + '/episode/' + str(episode_number) + '?api_key=' + api_key + '&language=en-US')
+
 
 class Search:
     def __init__(self, query="", language="en-US"):
