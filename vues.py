@@ -110,9 +110,22 @@ def search():
             search_result_code = -2
         return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
                                fav_series=fav_series)
-    else:
-        return render_template("error.html", error_msg="This should never happen (GET request or no request)", login_error=True)
-
+    elif request.method == "GET":
+        if request.args["search"]:  # if the search query is not empty
+            search_result = our_tmdb.Search(request.args["search"]).series
+            if len(search_result) == 0:
+                search_result_code = -1
+            else:
+                search_result_code = 1
+                for series in search_result:
+                    try:
+                        id_poster[series.id] = POSTER_PATH + series.poster_path
+                    except:  # some series might not have posters
+                        pass
+        else:
+            search_result_code = -2
+        return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
+                               fav_series=fav_series)
 
 @app.route("/addSeries/<int:series_id>")
 def add_series_to_fav(series_id):
