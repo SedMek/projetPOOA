@@ -56,7 +56,7 @@ class Series:
         for i in range(len(l)):
             exec("self." + l[i] + "=self.series_info['" + l[i] + "']")
         if "status_code" in l and int(self.series_info["status_code"]) >= 2:
-            raise tmdbException(self.series_info["status_message"])
+            raise tmdbException("You have reached the request limit allowed by TheMovieDB. Please wait...")
 
 
 class Season(Series):
