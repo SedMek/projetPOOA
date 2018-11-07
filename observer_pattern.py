@@ -2,6 +2,7 @@ import os
 import abc
 import our_tmdb
 
+
 os.chdir('static')
 try: os.chdir('data')
 except:
@@ -13,6 +14,7 @@ except:
     os.mkdir('notifications_data')
     os.chdir('notifications_data')
 
+all_series
 
 f=open("1425","r")
 old=eval(f.read())

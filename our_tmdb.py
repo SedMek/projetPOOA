@@ -76,7 +76,8 @@ class Episode(Season):
         self.episode_info = requests.get(
             'https://api.themoviedb.org/' + api_version + '/tv/' + str(id) + '/season/' + str(
                 season_number) + '/episode/' + str(episode_number) + '?api_key=' + api_key + '&language=en-US').json()
-
+        print('https://api.themoviedb.org/' + api_version + '/tv/' + str(id) + '/season/' + str(
+                season_number) + '/episode/' + str(episode_number) + '?api_key=' + api_key + '&language=en-US')
 
 class Search:
     def __init__(self, query="", language="en-US"):
