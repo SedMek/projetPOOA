@@ -62,14 +62,14 @@ def home():
                     storage_db.ajout_infos_user(request.form["first_name"], request.form["last_name"],
                                                 request.form["email"], request.form["password"])
                 except storage_db.LoginAlreadyUsedException as e:
-                    return render_template("error.html", error_msg=str(e))
+                    return render_template("error.html", error_msg=str(e), login_error=True)
             # trying to login, works for both new created account or already created account
             try:
                 user_object = storage_db.authent(request.form["email"], request.form["password"])
                 current_user = our_tmdb.User(user_object)
                 session["current_user"] = current_user.__dict__
             except Exception as e:
-                return render_template("error.html", error_msg=str(e))
+                return render_template("error.html", error_msg=str(e), login_error=True)
         else:  # settings update case
             current_user = our_tmdb.User(session["current_user"])
             current_user.update_settings(**request.form.to_dict())
@@ -81,7 +81,7 @@ def home():
     try:
         fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
     except our_tmdb.tmdbException as e:
-        return render_template("error.html", error_msg=str(e))
+        return render_template("error.html", error_msg=str(e), login_error=False)
     return render_template("index.html", fav_series=fav_series)
 
 
@@ -91,7 +91,7 @@ def search():
     try:
         fav_series = [our_tmdb.Series(i) for i in current_user.favourite_series]
     except our_tmdb.tmdbException as e:
-        return render_template("error.html", error_msg=str(e))
+        return render_template("error.html", error_msg=str(e), login_error=False)
     # search_result_code 0 for no search issued, 1 for search with results and -1 for search without results -2 for empty search
     id_poster = dict()
     if request.method == "POST":

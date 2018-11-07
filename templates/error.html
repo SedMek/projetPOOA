@@ -12,6 +12,11 @@
 </head>
 <body>
 <h1 class="my-4 text-left text-white" style="padding-left: 30px">{{error_msg}}</h1>
+{% if login_error %}
 <a href='{{url_for("login")}}' style="padding-left: 30px">Retry sign up / login </a>
+{% else %}
+<meta http-equiv="refresh" content="3" >
+<div class="text-white">This page will reload automatically</div>
+{% endif %}
 </body>
 </html>
