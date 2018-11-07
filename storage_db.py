@@ -11,9 +11,10 @@ from mongoengine import connect, DynamicDocument, StringField, BooleanField, Lis
 import our_tmdb
 import os
 
-MONGODB_URI = os.environ["MONGODB_URI"]
+#MONGODB_URI = os.environ["MONGODB_URI"]
+#connect('pooa_project_db', host=MONGODB_URI)  # pour l'instant localhost, voir comment changer par la suite
 
-connect('pooa_project_db', host=MONGODB_URI)  # pour l'instant localhost, voir comment changer par la suite
+connect('pooa_project_db', host='localhost', port=27017)  # for local dev
 
 
 class UserNotFoundException(Exception):
