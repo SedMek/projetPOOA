@@ -3,7 +3,7 @@ const POSTER_PATH="https://image.tmdb.org/t/p/w200/";
 console.log("hey")
 
 
-
+/*
 var stringData = $.ajax({
                     url: "/notify",
                     async: false
@@ -30,7 +30,7 @@ function new_notif() {
 
 }
 
-
+*/
 
 function fill_series_info(series) {
     /* presentation vue */
