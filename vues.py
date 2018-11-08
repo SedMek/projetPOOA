@@ -95,27 +95,25 @@ def search():
     except our_tmdb.tmdbException as e:  # showing an error when the API limit is reached
         return render_template("error.html", error_msg=str(e), login_error=False)
 
-    id_poster = dict()
     if request.method == "GET":
+        id_poster = dict()
         if request.args["search"]:  # if the search query is not empty
-            try:  # trying to get thhe series that are the result of the search
-                search_result = our_tmdb.Search(request.args["search"]).series
+            try:  # trying to get the series that are the result of the search
+                search = our_tmdb.Search(request.args["search"])
+                search_result_series = search.series_poster.keys()
+                id_poster = search.series_poster
             except our_tmdb.tmdbException as e:  # showing an error when the API limit is reached
                 return render_template("error.html", error_msg=str(e), login_error=False)
 
-            if len(search_result) == 0:
+            if len(search_result_series) == 0:
                 search_result_code = -1  # -1 for search without results
             else:
                 search_result_code = 1  # 1 for search with results
-                for series in search_result:
-                    try:
-                        id_poster[series.id] = POSTER_PATH + series.poster_path
-                    except:  # some series might not have posters
-                        pass  # we will not display these series
         else:
             search_result_code = -2  # -2 for empty search
-        return render_template("search_result.html", id_poster=id_poster, search_result_code=search_result_code,
-                               fav_series=fav_series)
+
+        return render_template("search_result.html", id_poster=id_poster,
+                               search_result_code=search_result_code, fav_series=fav_series)
 
 
 @app.route("/addSeries/<int:series_id>")

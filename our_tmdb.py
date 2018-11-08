@@ -84,9 +84,14 @@ class Search:
         self.query = query
         self.language = language
         self.basic_search_url = "http://api.themoviedb.org/" + api_version + "/search/tv?api_key=" + api_key + "&query=" + query + "&language" + self.language
-        self.resp = requests.get(self.basic_search_url).json()
-        self.total_pages = self.resp["total_pages"]
-        self.series = [Series(e["id"]) for e in self.get_page(self)["results"]]
+        self.results = self.get_page(self)["results"]
+        self.series_poster = dict()
+        for result in self.results:
+            print(result)
+            try:
+                self.series_poster[result['id']] = POSTER_PATH + result['poster_path']
+            except:
+                pass
 
     def get_page(self, page=1):
         return requests.get(self.basic_search_url + "&page=" + str(page)).json()
