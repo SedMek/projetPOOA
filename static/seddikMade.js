@@ -105,10 +105,13 @@ function show_series_info(series) {
     $(".series_info_block").show();
 }
 
+let notification_badge = 1;
 
 var main = function() {
   $('.notification img').click(function() {
     $('.notification-menu').toggle();
+    document.getElementById("notification").removeAttribute("data-badge");
+    document.getElementById("notification").removeAttribute("data-badge");
   });
 
   $('.post .btn').click(function() {
