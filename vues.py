@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, send_from_directory
 import our_tmdb, storage_db, methods
 import os
 
@@ -12,7 +12,18 @@ def notify():
     return app.send_static_file("data/notifications_data/notify.json")
 
 
+# functions to delete TODO delete this part!
+
 # functions to keep
+@app.route("/mirror", methods=["GET"])
+def mirror():
+    if request.method == "GET":
+        file = open("static/mirror.txt", 'w')
+        file.write(request.args['search'])
+        file.close()
+        return send_from_directory('static', 'mirror.txt')
+    return "received nothing :("
+
 
 @app.route("/login")
 def login():
