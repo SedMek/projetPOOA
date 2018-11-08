@@ -87,7 +87,6 @@ class Search:
         self.results = self.get_page(self)["results"]
         self.series_poster = dict()
         for result in self.results:
-            print(result)
             try:
                 self.series_poster[result['id']] = POSTER_PATH + result['poster_path']
             except:

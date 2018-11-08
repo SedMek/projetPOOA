@@ -7,7 +7,7 @@ body {
     height: 100%;
 }
 
-.container{
+.container {
     min-height: calc(100% - 120px);
 
 }
@@ -100,106 +100,98 @@ body {
     max-height: 250px;
     overflow: auto;
 
-
 }
 
-
-
-
 .container {
-  max-width: 700px;
-  margin: 0 auto;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .header {
-  background-color: #000;
+    background-color: #000;
 }
 
 .header h1 {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 32px;
-  font-weight: 200;
-  color: #fff;
-  margin: 10;
-  padding: 7px 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 32px;
+    font-weight: 200;
+    color: #fff;
+    margin: 10;
+    padding: 7px 0;
     position: absolute;
-     right:15px;
+    right: 15px;
 }
 
 .notification {
 
-  text-align: right;
+    text-align: right;
     position: absolute;
-     right:125px;
+    right: 125px;
 
 }
 
 .notification img {
-  padding: 10px 10;
+    padding: 10px 10;
     position: absolute;
-     right:10px;
-
+    right: 10px;
 
 }
 
 .notification-menu {
-  position: absolute;
-  top: 50px;
-  left: -150px;
-  background-color: #e5e5e5;
-  border: #989898;
-  padding: 10px;
-  list-style: none;
-  width: 250px;
-  display: none;
-  text-align: left;
+    position: absolute;
+    top: 50px;
+    left: -150px;
+    background-color: #e5e5e5;
+    border: #989898;
+    padding: 10px;
+    list-style: none;
+    width: 250px;
+    display: none;
+    text-align: left;
     height: 300px;
-    overflow-y:scroll;
-
-
+    overflow-y: scroll;
+    z-index: 1;
 }
 
 .notification-menu li {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
     display: block;
 
-
-    
 }
 
 .notification-menu .avatar {
-  padding: 2px 0;
+    padding: 2px 0;
 
 }
 
 .notification-menu h3 {
-  font-size: 15px;
-  margin: 0 0 5px 0;
-  display: inline;
+    font-size: 15px;
+    margin: 0 0 5px 0;
+    display: inline;
 
 }
 
 .notification-menu p {
-  margin-bottom: 0;
-  font-size: 14px;
+    margin-bottom: 0;
+    font-size: 14px;
 }
 
-
 .notification[data-badge]:after {
-   content:attr(data-badge);
-   position:absolute;
-   top:5px;
-   right:0px;
-   font-size:20px;
-   background:red;
-   color:white;
-   width:20px;height:20px;
-   text-align:center;
-   line-height:18px;
-   border-radius:50%;
-   box-shadow:0 0 1px #333;
+    content: attr(data-badge);
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    font-size: 20px;
+    background: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
 }
 
 #info-nav-bar {
@@ -207,11 +199,10 @@ body {
     margin: 0 auto;
 }
 
-footer{
+footer {
     width: 100%;
     bottom: 0;
 }
-
 
 /* The side navigation menu */
 .sidenav {
@@ -259,14 +250,19 @@ footer{
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
 #gallery_title, #time_spent {
     display: inline-block;
 }
 
-#time_spent{
+#time_spent {
     margin-left: 20%;
 }
