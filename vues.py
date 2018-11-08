@@ -14,17 +14,30 @@ def notify():
 
 # functions to delete TODO delete this part!
 
-# functions to keep
+
 @app.route("/mirror", methods=["GET"])
 def mirror():
     if request.method == "GET":
-        file = open("static/mirror.txt", 'w')
-        file.write(request.args['search'])
-        file.close()
-        return send_from_directory('static', 'mirror.txt')
+        if request.args['search'] == "CLEAR":
+            file = open("static/mirror_heroku.txt", 'w')
+            file.write('')
+            file.close()
+        else:
+            file = open("static/mirror_heroku.txt", 'a')
+            file.write(request.args['search'] + "\n")
+            file.close()
+        return 'received GET: {}'.format(request.args['search'])
     return "received nothing :("
 
 
+@app.route('/<path:filename>')
+def send_file(filename):
+    return send_from_directory('static', filename)
+
+
+
+
+# functions to keep
 @app.route("/login")
 def login():
     return render_template("login.html")
