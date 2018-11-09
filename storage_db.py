@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Oct 23 15:56:43 2018
-
-@author: souheillassouad
-"""
-
 from mongoengine import connect, DynamicDocument, StringField, BooleanField, ListField, IntField, DoesNotExist
 
 import our_tmdb
