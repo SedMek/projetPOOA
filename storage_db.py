@@ -11,10 +11,10 @@ from mongoengine import connect, DynamicDocument, StringField, BooleanField, Lis
 import our_tmdb
 import os
 
-#MONGODB_URI = os.environ["MONGODB_URI"]
-#connect('pooa_project_db', host=MONGODB_URI)  # pour l'instant localhost, voir comment changer par la suite
+# MONGODB_URI = os.environ["MONGODB_URI"]
+# connect('pooa_project_db', host=MONGODB_URI)  # for prod environment
 
-connect('pooa_project_db', host='localhost', port=27017)  # for local dev
+connect('pooa_project_db', host='localhost', port=27017)  # for dev environment
 
 
 class UserNotFoundException(Exception):
@@ -28,8 +28,8 @@ class IncorrectPasswordException(Exception):
 class LoginAlreadyUsedException(Exception):
     pass
 
-    # Création d'une base de données utilisateurs, voir avec le groupe comment elle sera implémenté
 
+# Création d'une base de données utilisateurs
 
 class User(DynamicDocument):
     first_name = StringField(required=True)
@@ -61,20 +61,6 @@ def update_user_fav_series(tmdb_user):
     try:
         l = User.objects.get(login=tmdb_user.login)
         l.favourite_series = tmdb_user.favourite_series
-        l.save()
-    except DoesNotExist:
-        raise UserNotFoundException("l'utilisateur n'exite pas")
-
-
-# Fonction rajoutant une série à la liste de séries favoris d'un utilisteur
-def ajout_id_serie_to_fav(id_serie, login_user):
-    try:
-        l = User.objects.get(login=login_user)
-
-        if id_serie in l.favourite_series:  # if the id already exists, remove it
-            l.favourite_series.remove(id_serie)
-
-        l.favourite_series.insert(0, id_serie)  # always add it in first position
         l.save()
     except DoesNotExist:
         raise UserNotFoundException("l'utilisateur n'exite pas")

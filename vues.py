@@ -12,31 +12,6 @@ def notify():
     return app.send_static_file("data/notifications_data/notify.json")
 
 
-# functions to delete TODO delete this part!
-
-
-@app.route("/mirror", methods=["GET"])
-def mirror():
-    if request.method == "GET":
-        if request.args['search'] == "CLEAR":
-            file = open("static/mirror_heroku.txt", 'w')
-            file.write('')
-            file.close()
-        else:
-            file = open("static/mirror_heroku.txt", 'a')
-            file.write(request.args['search'] + "\n")
-            file.close()
-        return 'received GET: {}'.format(request.args['search'])
-    return "received nothing :("
-
-
-@app.route('/<path:filename>')
-def send_file(filename):
-    return send_from_directory('static', filename)
-
-
-
-
 # functions to keep
 @app.route("/login")
 def login():
@@ -69,12 +44,6 @@ def logout():
     # remove the username from the session if it is there
     session.pop('current_user', None)
     return redirect(url_for('login'))
-
-
-@app.route("/who")
-def who():
-    current_user = our_tmdb.User(session["current_user"])
-    return str(current_user.__dict__)
 
 
 @app.route("/", methods=["GET", "POST"])
