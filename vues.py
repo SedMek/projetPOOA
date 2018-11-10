@@ -7,15 +7,25 @@ app.secret_key = "hello".encode()
 POSTER_PATH = our_tmdb.POSTER_PATH
 
 
+# --------------- NOTIFICATIONS ---------------
+
 @app.route("/notify")
 def notify():
     return app.send_static_file("data/notifications_data/notify.json")
 
 
-# functions to keep
+# --------------- SIGN-UP / LOGIN ---------------
+
 @app.route("/login")
 def login():
     return render_template("login.html")
+
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it is there
+    session.pop('current_user', None)
+    return redirect(url_for('login'))
 
 
 @app.route("/forgot_password", methods=["POST"])
@@ -26,7 +36,10 @@ def forgot_password():
             user_email = request.form["email"]
             new_password = methods.generate_password()
             methods.send_password_mail(user_email, new_password)
-            storage_db.update_password_in_db(user_email, new_password)
+            try:
+                storage_db.update_password_in_db(user_email, new_password)
+            except storage_db.UserNotFoundException as e:
+                return render_template("error.html", error_msg=str(e), login_error=True)
         else:  # should never happen
             pass
     return render_template("forgot_password.html", email=user_email)
@@ -39,12 +52,7 @@ def settings():
                            browser_notifications=current_user.browser_notifications, email=current_user.login)
 
 
-@app.route('/logout')
-def logout():
-    # remove the username from the session if it is there
-    session.pop('current_user', None)
-    return redirect(url_for('login'))
-
+# --------------- HOME ---------------
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -109,6 +117,8 @@ def search():
                                search_result_code=search_result_code, fav_series=fav_series)
 
 
+# --------------- FAVORITE SERIES MANIPULATION ---------------
+
 @app.route("/addSeries/<int:series_id>")
 def add_series_to_fav(series_id):
     current_user = our_tmdb.User(session["current_user"])
@@ -133,7 +143,8 @@ def clear_fav():
     return redirect(url_for("home"))
 
 
-# filters
+# --------------- FLASK HOMEMADE FILTERS ---------------
+
 @app.template_filter('join_networks')
 def join_networks(series):
     return methods.join_networks(series)

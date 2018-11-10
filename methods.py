@@ -1,7 +1,6 @@
 import smtplib
 import random
 import string
-from storage_db import *
 
 
 def envoi_mail(id_utilisateur, serie, num_dernier_episode):

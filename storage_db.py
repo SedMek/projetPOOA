@@ -87,7 +87,10 @@ def ajout_serie_utilisateur(idSerie, idUtilisateur):
 
 
 def update_password_in_db(user_id, new_password):
-    user = User.objects.get(login=user_id)
+    try:
+        user = User.objects.get(login=user_id)
+    except DoesNotExist:
+        raise UserNotFoundException("l'utilisateur n'exite pas")
     user.password = new_password
     user.save()
 
